@@ -7,14 +7,24 @@ An open, hands-on curriculum in **vegan food science** — built to be hosted on
 
 ## Live site
 
-This site is built with Jekyll and is deployed automatically by GitHub Pages.
-After enabling Pages in repository **Settings → Pages → Source: `main` branch / root**, it will be served at:
+The site is built with Jekyll and deployed by the GitHub Actions workflow at
+`.github/workflows/pages.yml` on every push to `main`.
+
+**One-time setup (once per repo):**
+
+1. Go to **Settings → Pages**.
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+3. Push to `main` (or re-run the workflow). The first deploy takes ~1 min.
+
+The site will be served at:
 
 ```
-https://sbezner.github.io/veganfoodscience/
+https://sbezner.github.io/VeganFoodScience/
 ```
 
-(or your custom domain if you add one).
+> **Important:** the URL path is **case-sensitive** and must match the
+> repository name exactly. The `baseurl` value in `_config.yml` must
+> match too — update it if you fork or rename the repo.
 
 ## What's in the curriculum
 
