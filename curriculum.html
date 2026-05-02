@@ -1,0 +1,77 @@
+---
+layout: default
+title: "Curriculum"
+permalink: /curriculum/
+description: "The full Plant Lab curriculum — 12 modules, 60+ hours of plant-based food science."
+---
+
+<section class="section">
+  <div class="container">
+    <header class="section__head" style="text-align:left; margin-bottom:2rem;">
+      <span class="eyebrow">The Curriculum</span>
+      <h2 style="text-align:left;">Twelve modules of plant-based food science</h2>
+      <p style="text-align:left; margin:0;">
+        Designed to be taken in order, but each module also stands on its own.
+        Plan on roughly four to six hours per module, plus the time to actually
+        cook the labs (which is the best part).
+      </p>
+    </header>
+
+    <div class="module-progress" data-progress-total="12">
+      <div class="progress-bar"><div class="progress-bar__fill" style="width:0"></div></div>
+      <span class="muted" data-progress-label>0 of 12 modules complete</span>
+    </div>
+
+    <div class="modules">
+      {% for m in site.modules %}
+      <div class="module-card" data-module-id="{{ m.id }}">
+        <a class="cover-link" href="{{ '/modules/' | append: m.num | append: '-' | append: m.slug | append: '/' | relative_url }}" aria-label="{{ m.title }}"></a>
+        <div class="module-card__num">{{ m.num }}</div>
+        <h3 class="module-card__title">{{ m.title }}</h3>
+        <p class="module-card__desc">{{ m.summary }}</p>
+        <div class="module-card__meta">
+          <span class="badge">{{ m.duration }}</span>
+          {% for t in m.topics limit:3 %}<span class="dot"></span><span>{{ t }}</span>{% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <hr>
+
+    <div class="prose">
+      <h2>How to take this course</h2>
+      <p>
+        There's no enrollment. No grade. The course is structured as a
+        self-guided sequence of reading + kitchen practice + a short
+        quiz to check yourself.
+      </p>
+      <h3>What you'll need</h3>
+      <ul>
+        <li>A digital kitchen scale (preferably one that reads to 0.1 g)</li>
+        <li>An instant-read thermometer</li>
+        <li>A blender — ideally a high-speed one, but anything will do</li>
+        <li>A fine-mesh sieve and cheesecloth or a nut-milk bag</li>
+        <li>A few jars (mason jars are fine), a pH paper roll (optional but nice)</li>
+        <li>Patience for fermentation, and curiosity for everything else</li>
+      </ul>
+
+      <h3>Suggested pace</h3>
+      <p>
+        One module per week makes a comfortable 12-week course.
+        Two modules a week works for the motivated. Don't skip the labs —
+        the science only really lands when you've tasted the difference.
+      </p>
+
+      <div class="callout callout--key">
+        <div class="callout__title">📍 Where to start</div>
+        <p style="margin:0;">
+          Begin with <a href="{{ '/modules/01-foundations/' | relative_url }}">Module 1: Foundations</a>.
+          It introduces the framework we'll use to think about every food we encounter — the four
+          macromolecules, water activity, and the simple but powerful idea of treating cooking
+          as a series of controllable reactions.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

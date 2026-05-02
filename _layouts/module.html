@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<div class="container">
+  <div class="module-shell">
+    <aside class="sidebar" aria-label="On this page">
+      <h4>On this page</h4>
+      <ul class="toc">
+        {% for s in page.sections %}
+        <li><a href="#{{ s.id }}">{{ s.label }}</a></li>
+        {% endfor %}
+      </ul>
+      <hr>
+      <h4>Module</h4>
+      <p class="muted" style="margin:.2rem 0 .8rem;">{{ page.duration }} · {{ page.level | default: "Intro" }}</p>
+      <button class="btn btn--primary" data-action="mark-complete" data-module-id="{{ page.module_id }}" style="width:100%;">Mark module complete</button>
+      <p style="margin-top:1rem;"><a href="{{ '/curriculum/' | relative_url }}" class="muted">← All modules</a></p>
+    </aside>
+
+    <article>
+      <header class="module-header">
+        <div class="module-header__crumbs">
+          <a href="{{ '/' | relative_url }}">Home</a> ·
+          <a href="{{ '/curriculum/' | relative_url }}">Curriculum</a> ·
+          <span>Module {{ page.module_num }}</span>
+        </div>
+        <div>
+          {% for t in page.tags %}<span class="pill {{ t.cls }}">{{ t.label }}</span>{% endfor %}
+        </div>
+        <h1 class="module-header__title">{{ page.title }}</h1>
+        <p class="module-header__lede">{{ page.lede }}</p>
+      </header>
+
+      {{ content }}
+
+      <nav class="next-prev" aria-label="Module navigation">
+        {% if page.prev %}
+          <a href="{{ page.prev.url | relative_url }}">
+            <small>← Previous</small>
+            <strong>{{ page.prev.title }}</strong>
+          </a>
+        {% else %}
+          <a href="{{ '/curriculum/' | relative_url }}">
+            <small>← Back to</small>
+            <strong>Curriculum overview</strong>
+          </a>
+        {% endif %}
+        {% if page.next %}
+          <a href="{{ page.next.url | relative_url }}" class="right">
+            <small>Next →</small>
+            <strong>{{ page.next.title }}</strong>
+          </a>
+        {% else %}
+          <a href="{{ '/curriculum/' | relative_url }}" class="right">
+            <small>You finished! →</small>
+            <strong>See all modules</strong>
+          </a>
+        {% endif %}
+      </nav>
+    </article>
+  </div>
+</div>

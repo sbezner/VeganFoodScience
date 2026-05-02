@@ -1,0 +1,289 @@
+---
+layout: module
+title: "Texturization Technologies"
+permalink: /modules/06-texturization/
+module_id: m06
+module_num: "06"
+duration: "≈ 5 hours"
+level: "Applied"
+lede: "How does a soybean become a steak? In this module we'll walk through the engineering that gives plant proteins fibrous, chewy, anisotropic structure — from the humble extruder to mycelium scaffolds and food-grade 3-D printers."
+tags:
+  - { label: "Texturization", cls: "" }
+  - { label: "Engineering", cls: "pill--terra" }
+sections:
+  - { id: "objectives", label: "Learning objectives" }
+  - { id: "why", label: "Why texture matters" }
+  - { id: "extrusion", label: "Extrusion: the workhorse" }
+  - { id: "shear-cell", label: "Shear cell technology" }
+  - { id: "mycelium", label: "Mycelium and whole-cut frontiers" }
+  - { id: "printing", label: "3-D food printing" }
+  - { id: "lab", label: "Kitchen Lab #6" }
+  - { id: "quiz", label: "Self-check" }
+prev: { url: "/modules/05-fermentation/", title: "Fermentation" }
+next: { url: "/modules/07-flavor/", title: "Flavor and Sensory" }
+---
+
+<section id="objectives" class="prose">
+  <h2>Learning objectives</h2>
+  <ul>
+    <li>Define <em>anisotropy</em> in food and explain why it matters for meat-like texture.</li>
+    <li>Describe how low-moisture and high-moisture extrusion (LME, HMME / HMMA) work and what they produce.</li>
+    <li>Explain the shear cell process and why it can produce more meat-like fibers than extrusion.</li>
+    <li>Distinguish mycelium-grown meat alternatives from cultivated meat.</li>
+    <li>Describe how 3-D food printing builds structured products from edible inks.</li>
+  </ul>
+</section>
+
+<section id="why" class="prose">
+  <h2>Why texture matters more than flavor</h2>
+  <p>
+    A blind tasting often reveals an awkward truth: the flavor of a
+    well-formulated plant burger can be excellent, but the texture is
+    what gives it away. Steak isn't just steak-flavored — it has a
+    grain. It pulls apart in the direction the muscle fibers ran.
+    It resists the bite, then yields, then releases juice. This
+    directional structure is called <strong>anisotropy</strong>, and
+    it's the holy grail of plant-based meat science.
+  </p>
+  <p>
+    Mince and patties are easy. Whole cuts — a steak, a chicken breast,
+    a fillet of fish — are hard. Hard because plant proteins, in their
+    native state, don't form long, aligned fibers. They form blobs.
+    Texturization is the suite of technologies for getting plant
+    proteins out of the blob and into the fiber.
+  </p>
+</section>
+
+<section id="extrusion" class="prose">
+  <h2>Extrusion: the workhorse of plant meat</h2>
+  <p>
+    An <strong>extruder</strong> is a long heated barrel containing one
+    or two screws that simultaneously transport, mix, cook, and shape a
+    dough. Originally developed for pasta and breakfast cereals, the
+    twin-screw food extruder is now the most important machine in the
+    plant-meat industry.
+  </p>
+
+  <h3>Low-moisture extrusion (LME) → TVP</h3>
+  <p>
+    Soy, pea, or wheat protein flour is fed into the barrel at ~25–30%
+    moisture. Inside, screws shear and heat the dough to ~150 °C, melting
+    the protein. As it exits a die at the end, the sudden pressure drop
+    flashes water to steam, puffing the structure into a sponge-like
+    chunk. Dried, this is <strong>textured vegetable protein</strong> —
+    TVP — the basis of countless plant-based mince products since the
+    1960s. Rehydrated, it's chewy and sponge-like, but not particularly
+    fibrous.
+  </p>
+
+  <h3>High-moisture meat analogue (HMMA / HMME)</h3>
+  <p>
+    Same machine, very different operation. Moisture is bumped up to
+    ~60%. The cooked melt is forced not into open air but through a
+    long <strong>cooling die</strong> — a metal channel maybe a meter
+    long that gradually cools the melt as it flows. The combination of
+    laminar flow and slow cooling causes the proteins to align with the
+    direction of flow, building a layered, fibrous, anisotropic
+    structure. Cut it across the grain and it looks like chicken breast.
+    Pull along the grain and it shreds.
+  </p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" aria-label="HMMA extrusion schematic">
+      <rect x="20" y="80" width="380" height="40" fill="#e2efdc" stroke="#36732a" stroke-width="2" rx="6"/>
+      <g stroke="#36732a" stroke-width="1.5" fill="none">
+        <path d="M30 100 Q 50 80 70 100 T 110 100 T 150 100 T 190 100 T 230 100 T 270 100 T 310 100 T 350 100"/>
+      </g>
+      <text x="200" y="70" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#36732a">Twin-screw extruder barrel (heated)</text>
+
+      <rect x="400" y="85" width="160" height="30" fill="#cfe6c2" stroke="#36732a" stroke-width="2" rx="4"/>
+      <text x="480" y="78" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#36732a">Cooling die</text>
+
+      <g stroke="#c25b3a" stroke-width="2">
+        <line x1="402" y1="92" x2="558" y2="92"/>
+        <line x1="402" y1="100" x2="558" y2="100"/>
+        <line x1="402" y1="108" x2="558" y2="108"/>
+      </g>
+      <text x="480" y="135" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">aligned protein fibers exit</text>
+
+      <text x="40" y="160" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">water + protein in →</text>
+      <text x="560" y="170" text-anchor="end" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">→ "fillet"</text>
+    </svg>
+    <p class="fig-caption">In high-moisture extrusion, a long cooling die slows and aligns the protein flow, producing anisotropic structure.</p>
+  </div>
+
+  <p>
+    The major plant-meat brands — Beyond, Impossible, several private
+    label producers — all use HMMA at industrial scale. HMMA's quality
+    keeps climbing as engineers learn to tune screw geometry, ingredient
+    blends, and cooling profiles.
+  </p>
+</section>
+
+<section id="shear-cell" class="prose">
+  <h2>Shear cell: a gentler way to align</h2>
+  <p>
+    Pioneered at Wageningen University, the <strong>shear cell</strong>
+    (or "Couette cell") is a much simpler machine. Two concentric cones
+    sandwich a protein dough between them; one cone rotates, applying
+    steady simple shear, while heat flows through the cone walls. After
+    the dough sets, you open the cell and lift out a slab of protein
+    with strikingly fibrous, oriented structure.
+  </p>
+  <p>
+    Shear-cell texturization tends to use less energy than extrusion,
+    runs at lower temperatures (preserving more flavor and nutrition),
+    and can produce thicker structures — closer to a real "whole cut."
+    The trade-off is throughput: shear cells are batch processes.
+    Several companies are now scaling continuous shear-cell variants.
+  </p>
+</section>
+
+<section id="mycelium" class="prose">
+  <h2>Mycelium: building meat from the inside out</h2>
+  <p>
+    Filamentous fungi grow as networks of microscopic threads called
+    <em>hyphae</em>. Collectively they form a <strong>mycelium</strong> —
+    naturally fibrous, naturally anisotropic, and edible. Quorn (made
+    from the fungus <em>Fusarium venenatum</em>) has used mycelium since
+    the 1980s. A new generation of companies (Meati, Aqua Cultured,
+    Atlast Food Co.) cultivates large mycelial mats that can be cut into
+    thick whole cuts — chicken breast analogues, fish fillets, jerky.
+  </p>
+  <p>
+    Mycelium meats are vegan in the strict sense (no animals), high in
+    protein, naturally rich in B vitamins, and texturally remarkable
+    without any extrusion at all — the structure grew that way.
+  </p>
+
+  <div class="callout callout--note">
+    <div class="callout__title">Mycelium vs cultivated meat</div>
+    <p style="margin:0;">
+      Mycelium is fungal: vegan, fast (days), and cheap to grow. Cultivated
+      ("cultured") meat is animal cells grown in bioreactors: not vegan,
+      slower, more expensive, with closer molecular identity to conventional
+      meat. They are different solutions to overlapping problems.
+    </p>
+  </div>
+</section>
+
+<section id="printing" class="prose">
+  <h2>3-D printing: layer by layer</h2>
+  <p>
+    Food-grade 3-D printers extrude edible "inks" through fine nozzles in
+    programmed paths, building up a structure layer by layer. Two leading
+    plant-based use cases:
+  </p>
+  <ul>
+    <li><strong>Whole-cut steaks</strong>. Multiple inks (e.g. a protein paste, a fat paste, a connective-tissue analogue) are co-printed in interleaved paths to mimic the marbling and grain of beef. Companies: Redefine Meat, NovaMeat.</li>
+    <li><strong>Personalized nutrition</strong>. Printing customized ratios of macronutrients into bars or meals — useful for athletes, hospital patients, and astronauts.</li>
+  </ul>
+  <p>
+    The frontier is fast moving: print speeds are still slow relative to
+    extrusion, but the geometric control 3-D printing offers can produce
+    structures no extruder can match.
+  </p>
+</section>
+
+<section id="lab">
+  <div class="lab">
+    <div class="lab__head">
+      <span style="font-size:1.4rem;">🧪</span>
+      <h3>Kitchen Lab #6 — Hand-pulled seitan with anisotropy</h3>
+      <span class="tag">~2 hours</span>
+    </div>
+    <div class="lab__body">
+      <h4>What you'll learn</h4>
+      <p>
+        Without an extruder or shear cell, you can still build aligned
+        fibrous structure in the kitchen — the way Buddhist monks have
+        for centuries. You'll work wheat protein (gluten) into long
+        aligned strands and then steam-set them. The result has more bite,
+        grain, and "tooth" than any sliced loaf seitan.
+      </p>
+      <h4>You'll need</h4>
+      <ul>
+        <li>200 g vital wheat gluten</li>
+        <li>30 g chickpea flour or nutritional yeast (for flavor and tenderness)</li>
+        <li>240 mL cold vegetable broth</li>
+        <li>2 Tbsp soy sauce, 1 Tbsp olive oil, 1 tsp smoked paprika, ½ tsp ground black pepper</li>
+        <li>A simmering broth (1 L water + 1 stock cube) for poaching</li>
+      </ul>
+      <h4>Procedure</h4>
+      <ol>
+        <li>Whisk dry ingredients together. Whisk wet ingredients separately. Combine, knead briefly into a shaggy mass.</li>
+        <li><strong>Let rest, covered, 30 min.</strong> Hydration matters — gluten needs time.</li>
+        <li>Stretch the dough into a ~1 cm thick sheet. Fold in thirds. Stretch again. Fold. Repeat 6–8 times. You're aligning the gluten strands like puff pastry layers.</li>
+        <li>Cut the dough into 4–6 strips. Twist each strip on its long axis like a candy-cane (this further aligns the protein).</li>
+        <li>Place strips in a wide pan with the simmering broth. Keep at a bare simmer (not a boil — boiling makes seitan spongy) for 60 minutes, turning halfway.</li>
+        <li>Cool in the broth. Slice across the grain. Notice the fibrous, layered cross-section.</li>
+      </ol>
+      <h4>The science behind it</h4>
+      <p>
+        Vital wheat gluten is dehydrated wheat protein — about 75% pure.
+        When hydrated, it forms an extensible network of glutenin and
+        gliadin. Repeated stretching and folding aligns this network in
+        one direction, the same principle as HMMA's cooling die at 1/100
+        the cost. Gentle simmering sets the protein without disrupting
+        the alignment. Twisting before cooking stacks the strands into a
+        rope-like grain.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="quiz" data-quiz-id="m6">
+    <h3 class="quiz__title">Self-check</h3>
+
+    <div class="quiz-q" data-answer="2">
+      <div class="quiz-q__q">1. "Anisotropy" in plant meat refers to:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">An additive that tenderizes plant protein.</label>
+        <label class="quiz-opt"><input type="radio">A type of bacteria used in fermentation.</label>
+        <label class="quiz-opt"><input type="radio">Direction-dependent structure — like meat that pulls apart along the grain.</label>
+        <label class="quiz-opt"><input type="radio">A measure of moisture content.</label>
+      </div>
+      <div class="quiz-q__exp">Anisotropic materials behave differently along different axes. A real steak pulls apart easily one way and resists the other — the goal of HMMA and shear-cell technology.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <div class="quiz-q__q">2. The cooling die in HMMA does what?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Adds flavor to the protein.</label>
+        <label class="quiz-opt"><input type="radio">Aligns flowing protein into fibrous, layered structure as it cools.</label>
+        <label class="quiz-opt"><input type="radio">Sterilizes the product.</label>
+        <label class="quiz-opt"><input type="radio">Hydrogenates the fats.</label>
+      </div>
+      <div class="quiz-q__exp">A long cooling die holds the protein melt in steady laminar flow while it solidifies, building the aligned fiber structure that defines an HMMA fillet.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <div class="quiz-q__q">3. Which of these is mycelium-based, not extruded?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Beyond Burger</label>
+        <label class="quiz-opt"><input type="radio">Impossible Sausage</label>
+        <label class="quiz-opt"><input type="radio">TVP crumbles</label>
+        <label class="quiz-opt"><input type="radio">Quorn / Meati products</label>
+      </div>
+      <div class="quiz-q__exp">Quorn pioneered mycelium "mycoprotein" decades ago; Meati and others continue the tradition of growing fibrous structure naturally.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <div class="quiz-q__q">4. Cultivated meat (animal cells in bioreactors) is:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Not vegan, by definition.</label>
+        <label class="quiz-opt"><input type="radio">A type of mycelium.</label>
+        <label class="quiz-opt"><input type="radio">Always cheaper than plant meat.</label>
+        <label class="quiz-opt"><input type="radio">Made by extrusion.</label>
+      </div>
+      <div class="quiz-q__exp">Cultivated meat is real animal tissue, just grown outside an animal. Whether it qualifies as ethical or sustainable is a separate (interesting!) discussion — but it isn't vegan.</div>
+    </div>
+
+    <div class="quiz__actions">
+      <button class="btn btn--primary" data-action="quiz-check">Check answers</button>
+      <button class="btn btn--ghost" data-action="quiz-reset">Reset</button>
+      <span class="quiz__score" data-quiz-score></span>
+    </div>
+  </div>
+</section>

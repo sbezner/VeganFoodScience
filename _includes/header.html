@@ -1,0 +1,24 @@
+<header class="topbar">
+  <div class="topbar__inner">
+    <a href="{{ '/' | relative_url }}" class="brand" aria-label="The Plant Lab — home">
+      <span class="brand__mark" aria-hidden="true">P</span>
+      <span>The Plant Lab</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/curriculum/' | relative_url }}">Curriculum</a>
+      <a href="{{ '/labs/' | relative_url }}">Kitchen Labs</a>
+      <a href="{{ '/glossary/' | relative_url }}">Glossary</a>
+      <a href="{{ '/resources/' | relative_url }}">Resources</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+    </nav>
+    <div style="display:flex; gap:.4rem; align-items:center;">
+      <button class="icon-btn" data-action="toggle-theme" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>

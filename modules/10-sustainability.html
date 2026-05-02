@@ -1,0 +1,278 @@
+---
+layout: module
+title: "Sustainability and Food Systems"
+permalink: /modules/10-sustainability/
+module_id: m10
+module_num: "10"
+duration: "≈ 4 hours"
+level: "Context"
+lede: "Plant-based food doesn't sit in a vacuum — it sits inside a global food system with land, water, energy, biodiversity, labor, and policy all in tension. This module gives you the analytical tools to think clearly about sustainability claims, and to spot the easy ones from the genuine ones."
+tags:
+  - { label: "Systems", cls: "" }
+  - { label: "Context", cls: "pill--gold" }
+sections:
+  - { id: "objectives", label: "Learning objectives" }
+  - { id: "lca", label: "Life-cycle assessment" }
+  - { id: "comparisons", label: "What the numbers say" }
+  - { id: "tradeoffs", label: "Honest trade-offs" }
+  - { id: "policy", label: "Beyond the plate" }
+  - { id: "lab", label: "Kitchen Lab #10" }
+  - { id: "quiz", label: "Self-check" }
+prev: { url: "/modules/09-nutrition/", title: "Nutrition" }
+next: { url: "/modules/11-frontier/", title: "The Frontier" }
+---
+
+<section id="objectives" class="prose">
+  <h2>Learning objectives</h2>
+  <ul>
+    <li>Define life-cycle assessment (LCA) and identify its main impact categories.</li>
+    <li>Compare the environmental footprints of major plant and animal protein sources.</li>
+    <li>Discuss honestly the trade-offs of plant-based supply chains (palm oil, monocultures, transport).</li>
+    <li>Place plant-based food within broader frameworks like the EAT-Lancet planetary health diet.</li>
+  </ul>
+</section>
+
+<section id="lca" class="prose">
+  <h2>Life-cycle assessment, briefly</h2>
+  <p>
+    A <strong>life-cycle assessment</strong> totals the environmental
+    impacts of a product from "cradle to grave" — raw material extraction,
+    production, transport, processing, packaging, use, end-of-life. The
+    most common impact categories in food LCAs:
+  </p>
+  <ul>
+    <li><strong>Greenhouse gas emissions</strong> (kg CO₂-equivalent per kg product) — climate impact</li>
+    <li><strong>Land use</strong> (m² per kg) — opportunity cost vs forests, grasslands, biodiversity</li>
+    <li><strong>Freshwater withdrawal</strong> (L per kg) — pressure on rivers and aquifers</li>
+    <li><strong>Eutrophication potential</strong> — nitrogen and phosphorus runoff into waterways</li>
+    <li><strong>Acidification potential</strong> — sulfur and ammonia emissions</li>
+  </ul>
+  <p>
+    LCAs are powerful but assumption-heavy. The same product can score
+    very differently depending on the system boundaries chosen (e.g.
+    do you include the methane from manure? the carbon stored by
+    pasture? the deforestation embedded in a soy crop?). Treat point
+    estimates as orientation, not gospel — and trust well-cited
+    meta-analyses over single studies.
+  </p>
+</section>
+
+<section id="comparisons" class="prose">
+  <h2>What the numbers actually say</h2>
+  <p>
+    The 2018 Poore &amp; Nemecek meta-analysis (in <em>Science</em>) pooled
+    LCAs covering 38,700 farms and 1,600 processors across 119 countries.
+    It remains the most comprehensive view we have. Selected medians,
+    per kg of food product:
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Food</th><th>kg CO₂-eq / kg</th><th>Land use (m²)</th><th>Freshwater (L)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Beef (beef herd)</td><td>~60</td><td>~164</td><td>~1,450</td></tr>
+        <tr><td>Lamb &amp; mutton</td><td>~24</td><td>~185</td><td>~1,800</td></tr>
+        <tr><td>Cheese</td><td>~21</td><td>~88</td><td>~5,600</td></tr>
+        <tr><td>Pork</td><td>~7</td><td>~11</td><td>~1,800</td></tr>
+        <tr><td>Poultry</td><td>~6</td><td>~7</td><td>~660</td></tr>
+        <tr><td>Eggs</td><td>~4.5</td><td>~6</td><td>~580</td></tr>
+        <tr><td>Tofu</td><td>~3</td><td>~2</td><td>~150</td></tr>
+        <tr><td>Peas</td><td>~1</td><td>~3.4</td><td>~400</td></tr>
+        <tr><td>Other legumes</td><td>~1</td><td>~3.4</td><td>~400</td></tr>
+        <tr><td>Nuts</td><td>~0.4 (carbon-negative on some farms)</td><td>~7</td><td>~4,100 (almonds high)</td></tr>
+        <tr><td>Wheat</td><td>~1.6</td><td>~3.9</td><td>~1,650</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    The pattern is unambiguous: animal foods (beef especially) sit at the
+    high end of nearly every category; plant proteins sit at the low end.
+    Even the most thoughtfully produced beef is typically more impactful
+    per kg than the most carelessly produced legumes.
+  </p>
+
+  <h3>Why so much higher for animals?</h3>
+  <p>
+    Three structural reasons: <strong>trophic inefficiency</strong> (about
+    90% of the energy a cow consumes is used by the cow itself, not stored
+    as edible mass — only 10% becomes meat); <strong>methane</strong>
+    (ruminants like cows and sheep generate methane via enteric
+    fermentation, a far more potent greenhouse gas than CO₂ over short
+    timescales); and <strong>land</strong> (grazing and feed production
+    together occupy roughly half of all habitable land on Earth).
+  </p>
+</section>
+
+<section id="tradeoffs" class="prose">
+  <h2>Honest trade-offs</h2>
+  <p>
+    Plant-based isn't a free lunch — it has its own footprint. A
+    serious sustainability practitioner reckons with the trade-offs:
+  </p>
+
+  <h3>Palm oil</h3>
+  <p>
+    Palm is the highest-yielding oil crop on Earth — far more efficient
+    per hectare than rapeseed, sunflower, or soy. The problem is
+    <em>where</em> it's grown: vast tracts of tropical rainforest in
+    Indonesia and Malaysia have been cleared for oil palm, displacing
+    biodiversity (orangutans, tigers) and releasing stored carbon. The
+    answer isn't necessarily to switch oils — alternatives often need
+    more land — but to demand certified, deforestation-free palm.
+  </p>
+
+  <h3>Almonds and water</h3>
+  <p>
+    Almonds are wonderfully nutrient-dense and have low GHG emissions —
+    but California's drought-stressed almond industry uses extreme
+    quantities of irrigation water. Almond milk's water footprint is
+    high per liter even though its carbon footprint is low.
+  </p>
+
+  <h3>Soy and deforestation</h3>
+  <p>
+    The vast majority of global soy is grown for animal feed, not for
+    direct human consumption. Soy-fed beef carries soy's land-use and
+    deforestation cost <em>plus</em> the cow's. Soy products eaten
+    directly (tofu, tempeh, soymilk) are dramatically more efficient.
+    The "soy is bad" rhetoric typically conflates these two flows.
+  </p>
+
+  <h3>Ultra-processed plant meats</h3>
+  <p>
+    Modern HMMA and isolate-based products use processing energy that
+    a chickpea does not. Even so, multiple LCAs find their footprints
+    sit comfortably below conventional beef and even pork — though
+    above whole legumes. The honest framing: an Impossible Burger is
+    far better than a beef burger, and a bowl of lentils is better
+    still.
+  </p>
+
+  <div class="callout callout--key">
+    <div class="callout__title">📐 The honest hierarchy</div>
+    <p style="margin:0;">
+      Whole plant foods → minimally processed plant foods → modern plant
+      meats → poultry → ruminant meats. The gradient is real, the differences
+      are large, and any move down the list helps.
+    </p>
+  </div>
+</section>
+
+<section id="policy" class="prose">
+  <h2>Beyond the plate</h2>
+  <p>
+    Personal food choices matter — and so does food <em>policy</em>. The
+    EAT-Lancet Commission's 2019 "planetary health diet" — a flexitarian
+    pattern dominated by plants with modest animal protein — was modeled
+    to feed 10 billion people in 2050 within Earth's planetary
+    boundaries. Many of its recommendations look a lot like a thoughtful
+    plant-based diet plus optional small servings of fish or eggs.
+  </p>
+  <p>
+    Levers beyond the individual:
+  </p>
+  <ul>
+    <li><strong>Public procurement</strong> — schools, hospitals, and government cafeterias choosing plant-forward menus.</li>
+    <li><strong>Subsidy reform</strong> — most agricultural subsidies historically support commodity grains for feed, not direct human food.</li>
+    <li><strong>Labelling and pricing</strong> — putting environmental footprint on the package; ending ambiguity about what a "plant-based meat" is.</li>
+    <li><strong>Farmer transition support</strong> — land restoration, agroforestry, plant-protein crops for direct human consumption.</li>
+  </ul>
+</section>
+
+<section id="lab">
+  <div class="lab">
+    <div class="lab__head">
+      <span style="font-size:1.4rem;">🧪</span>
+      <h3>Kitchen Lab #10 — Audit your week</h3>
+      <span class="tag">~1 hour</span>
+    </div>
+    <div class="lab__body">
+      <h4>What you'll do</h4>
+      <p>
+        Run a simple, honest audit of your last week of meals. Without
+        guilt or claim, just look. The aim is to identify the biggest
+        single shifts that would meaningfully reduce your food footprint.
+      </p>
+      <h4>You'll need</h4>
+      <ul>
+        <li>A notebook or spreadsheet</li>
+        <li>A free calculator: the <a href="https://ourworldindata.org/food-choice-vs-eating-local" target="_blank" rel="noopener">Our World in Data food carbon explorer</a> is excellent for orientation</li>
+      </ul>
+      <h4>Procedure</h4>
+      <ol>
+        <li>Write down every meal, snack, and drink for the past 7 days as best you can recall.</li>
+        <li>For each, note the dominant protein source: beef, lamb, pork, poultry, fish, dairy, eggs, legumes/tofu, nuts, etc.</li>
+        <li>Multiply portion sizes (in grams) by the per-kg CO₂-eq from the table earlier in this module to estimate weekly food emissions.</li>
+        <li>Identify your top 3 emission contributors. Are they daily habits or occasional indulgences?</li>
+        <li>Imagine swapping each top contributor for one tier "down" the hierarchy. Don't commit — just calculate the difference.</li>
+      </ol>
+      <h4>What to take from this</h4>
+      <p>
+        For most people in industrialized countries, &gt; 50% of food
+        emissions come from a small number of high-impact items —
+        especially red meat and cheese. Reducing these (not eliminating
+        anything else) is the single highest-leverage food choice
+        available to almost everyone.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="quiz" data-quiz-id="m10">
+    <h3 class="quiz__title">Self-check</h3>
+
+    <div class="quiz-q" data-answer="2">
+      <div class="quiz-q__q">1. The largest single category of land use globally is:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Cities and infrastructure.</label>
+        <label class="quiz-opt"><input type="radio">Forests for timber.</label>
+        <label class="quiz-opt"><input type="radio">Agriculture, of which most is grazing or feed for livestock.</label>
+        <label class="quiz-opt"><input type="radio">Cropland for direct human food.</label>
+      </div>
+      <div class="quiz-q__exp">Roughly half of all habitable land is agricultural, and about three-quarters of that is for animals (grazing or feed). The footprint of livestock is fundamentally a land story.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <div class="quiz-q__q">2. Why are ruminants (cattle, sheep) especially impactful for climate?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Enteric fermentation produces methane, a potent greenhouse gas.</label>
+        <label class="quiz-opt"><input type="radio">They primarily eat soybeans flown from Brazil.</label>
+        <label class="quiz-opt"><input type="radio">Their water consumption is the highest of any species.</label>
+        <label class="quiz-opt"><input type="radio">They can't be raised pasture-based.</label>
+      </div>
+      <div class="quiz-q__exp">Methane from enteric fermentation, combined with low feed-conversion efficiency and high land use, makes ruminants the heaviest-footprint food at the population level.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <div class="quiz-q__q">3. The "soy = deforestation" complaint is most accurately about:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Soy eaten directly as tofu and soymilk.</label>
+        <label class="quiz-opt"><input type="radio">Soy grown to feed livestock — the dominant use globally.</label>
+        <label class="quiz-opt"><input type="radio">Soy oil used in cosmetics.</label>
+        <label class="quiz-opt"><input type="radio">Soy used for biofuels exclusively.</label>
+      </div>
+      <div class="quiz-q__exp">~75–80% of global soy is grown for animal feed. Eating soy directly bypasses one trophic level and dramatically reduces the per-calorie land footprint.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <div class="quiz-q__q">4. The 2018 Poore &amp; Nemecek study found that switching from animal-based to plant-based diets:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio">Has no measurable benefit if local.</label>
+        <label class="quiz-opt"><input type="radio">Helps land but increases water use.</label>
+        <label class="quiz-opt"><input type="radio">Was inconclusive.</label>
+        <label class="quiz-opt"><input type="radio">Could reduce farmland use by ~75% globally and substantially reduce GHG emissions.</label>
+      </div>
+      <div class="quiz-q__exp">The headline finding remains striking: a global plant-based shift could free roughly 3.1 billion hectares of farmland — an area about the size of Africa.</div>
+    </div>
+
+    <div class="quiz__actions">
+      <button class="btn btn--primary" data-action="quiz-check">Check answers</button>
+      <button class="btn btn--ghost" data-action="quiz-reset">Reset</button>
+      <span class="quiz__score" data-quiz-score></span>
+    </div>
+  </div>
+</section>

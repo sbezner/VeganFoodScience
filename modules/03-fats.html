@@ -1,0 +1,318 @@
+---
+layout: module
+title: "Fats, Oils, and Plant Lipids"
+permalink: /modules/03-fats/
+module_id: m03
+module_num: "03"
+duration: "≈ 5 hours"
+level: "Core"
+lede: "Fat is flavor, structure, and mouthfeel — and one of the trickiest things to mimic in plant-based cooking. In this module you'll learn the chemistry of fats, the personalities of plant oils, and the modern art of building animal-free fat from a liquid oil."
+tags:
+  - { label: "Lipids", cls: "" }
+  - { label: "Core science", cls: "pill--berry" }
+sections:
+  - { id: "objectives", label: "Learning objectives" }
+  - { id: "structure", label: "Fat: a structural primer" }
+  - { id: "plant-fats", label: "Plant fats by personality" }
+  - { id: "smoke", label: "Smoke point and stability" }
+  - { id: "emulsions", label: "Emulsions" }
+  - { id: "structuring", label: "Structuring liquid oils" }
+  - { id: "lab", label: "Kitchen Lab #3" }
+  - { id: "quiz", label: "Self-check" }
+prev: { url: "/modules/02-proteins/", title: "Plant Proteins" }
+next: { url: "/modules/04-carbs-hydrocolloids/", title: "Carbs & Hydrocolloids" }
+---
+
+<section id="objectives" class="prose">
+  <h2>Learning objectives</h2>
+  <ul>
+    <li>Describe the structure of a triglyceride and the difference between saturated, monounsaturated, and polyunsaturated fats.</li>
+    <li>Explain why some plant fats are solid at room temperature and others aren't.</li>
+    <li>Predict an oil's smoke point from its composition and refinement level.</li>
+    <li>Distinguish O/W from W/O emulsions and identify common plant emulsifiers.</li>
+    <li>Describe at least two ways a liquid plant oil can be turned into a butter-like solid without hydrogenation.</li>
+  </ul>
+</section>
+
+<section id="structure" class="prose">
+  <h2>Fat: a structural primer</h2>
+  <p>
+    Most dietary fat is a <strong>triglyceride</strong>: a glycerol backbone with three fatty
+    acid "tails" attached. The tails are long carbon chains, and what
+    matters most is the bonds between those carbons:
+  </p>
+  <ul>
+    <li><strong>Saturated</strong> tails have only single bonds between carbons. They pack tightly and tend to be solid at room temperature. Coconut oil, cocoa butter.</li>
+    <li><strong>Monounsaturated</strong> tails have one double bond. The double bond creates a kink that prevents close packing. Liquid at room temp. Olive, avocado.</li>
+    <li><strong>Polyunsaturated</strong> tails have two or more double bonds. More kinks, more fluidity, but also more vulnerability to oxidation. Sunflower, flax, walnut.</li>
+  </ul>
+
+  <div class="diagram">
+    <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triglyceride and fatty acid types">
+      <g font-family="Inter, sans-serif" font-size="13" fill="#5a6660">
+        <text x="20" y="20">Triglyceride</text>
+      </g>
+      <!-- Glycerol backbone -->
+      <g stroke="#36732a" stroke-width="2" fill="#fff">
+        <circle cx="60" cy="60" r="10"/><circle cx="60" cy="120" r="10"/><circle cx="60" cy="180" r="10"/>
+      </g>
+      <text x="44" y="64" font-family="Georgia,serif" font-size="12" fill="#36732a">G</text>
+      <text x="44" y="124" font-family="Georgia,serif" font-size="12" fill="#36732a">G</text>
+      <text x="44" y="184" font-family="Georgia,serif" font-size="12" fill="#36732a">G</text>
+      <!-- Saturated tail -->
+      <g stroke="#36732a" stroke-width="2" fill="none">
+        <line x1="70" y1="60" x2="560" y2="60"/>
+        <!-- Mono kink -->
+        <polyline points="70,120 200,120 240,135 380,135 420,120 560,120"/>
+        <!-- Poly kinks -->
+        <polyline points="70,180 160,180 200,200 280,200 320,180 380,180 420,200 500,200 540,180 560,180"/>
+      </g>
+      <text x="580" y="64" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">saturated</text>
+      <text x="580" y="124" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">monounsaturated</text>
+      <text x="580" y="184" font-family="Inter,sans-serif" font-size="12" fill="#5a6660">polyunsaturated</text>
+    </svg>
+    <p class="fig-caption">Three fatty acid tails on a glycerol backbone. The kinks created by double bonds keep the molecules from packing tightly — and keep the oil liquid.</p>
+  </div>
+
+  <div class="callout callout--key">
+    <div class="callout__title">📌 Quick rule of thumb</div>
+    <p style="margin:0;">More saturation → harder fat at room temperature → more oxidatively stable, but typically less heart-healthy in the diet. The opposite for unsaturated.</p>
+  </div>
+</section>
+
+<section id="plant-fats" class="prose">
+  <h2>Plant fats by personality</h2>
+  <p>
+    Every plant fat behaves differently in your kitchen. A short tour of the
+    most important characters:
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Fat</th><th>Dominant fatty acid</th><th>Solid at 20 °C?</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Cocoa butter</td><td>Stearic, oleic, palmitic</td><td>Yes (sharp melt at 34 °C)</td><td>Chocolate, vegan butter base, "snap"</td></tr>
+        <tr><td>Coconut oil</td><td>Lauric (saturated, medium chain)</td><td>Yes</td><td>Curries, baking, vegan butter, candies</td></tr>
+        <tr><td>Palm fruit oil</td><td>Palmitic + oleic</td><td>Semi-solid</td><td>Industrial spreads, frying — but see sustainability</td></tr>
+        <tr><td>Olive oil</td><td>Oleic (mono)</td><td>Liquid</td><td>Dressings, low/medium heat sautéing</td></tr>
+        <tr><td>Avocado oil</td><td>Oleic (mono)</td><td>Liquid</td><td>High-heat searing (refined version)</td></tr>
+        <tr><td>Sunflower (high-oleic)</td><td>Oleic</td><td>Liquid</td><td>Frying, baking</td></tr>
+        <tr><td>Flaxseed oil</td><td>Alpha-linolenic (omega-3)</td><td>Liquid</td><td>Cold dressings — degrades fast with heat</td></tr>
+        <tr><td>Sesame oil</td><td>Oleic + linoleic</td><td>Liquid</td><td>Finishing flavor; toasted version is aromatic</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="smoke" class="prose">
+  <h2>Smoke point and oxidative stability</h2>
+  <p>
+    The <strong>smoke point</strong> is the temperature at which an oil begins
+    to visibly smoke — meaning fatty acids are breaking down and free
+    glycerol is becoming acrolein (the eye-stinging compound). It depends
+    on the oil's:
+  </p>
+  <ul>
+    <li><strong>Refinement</strong> — bleaching and deodorizing strip away the small molecules that smoke first. Refined oils have higher smoke points than unrefined ones.</li>
+    <li><strong>Free fatty acid content</strong> — old, oxidized oils smoke earlier.</li>
+    <li><strong>Saturation</strong> — saturated oils are slightly more thermally stable.</li>
+  </ul>
+  <p>
+    Smoke point is <em>not</em> the same as oxidative stability over time.
+    Polyunsaturated oils — even those with high smoke points — degrade
+    quickly when exposed to heat, light, and air. Store them cold and dark.
+  </p>
+
+  <div class="callout callout--warn">
+    <div class="callout__title">⚠️ Reusing fryer oil</div>
+    <p style="margin:0;">
+      Each frying cycle adds free fatty acids and oxidation products. The
+      smoke point falls, the oil darkens, and off-flavors compound. Filter,
+      cool, and reuse no more than 3–4 times for shallow frying.
+    </p>
+  </div>
+</section>
+
+<section id="emulsions" class="prose">
+  <h2>Emulsions: oil and water, getting along</h2>
+  <p>
+    An <strong>emulsion</strong> is a stable dispersion of one liquid in
+    another that wouldn't normally mix. Most food emulsions are:
+  </p>
+  <ul>
+    <li><strong>Oil-in-water (O/W):</strong> oil droplets suspended in a water-continuous phase. Vegan mayo, plant milk, salad dressing.</li>
+    <li><strong>Water-in-oil (W/O):</strong> water droplets in a fat-continuous phase. Vegan butter, margarine, ganache.</li>
+  </ul>
+  <p>
+    Both kinds need an <em>emulsifier</em> — a molecule with one end that
+    likes water and another that likes oil. The emulsifier coats each
+    droplet, lowering the energy cost of the interface so the system
+    doesn't separate.
+  </p>
+
+  <h3>Plant-based emulsifiers worth knowing</h3>
+  <ul>
+    <li><strong>Lecithin</strong> (from soy or sunflower) — the workhorse. Used in chocolate, margarines, baked goods.</li>
+    <li><strong>Mustard powder</strong> — its mucilage and small proteins emulsify a vinaigrette beautifully.</li>
+    <li><strong>Aquafaba</strong> — small soluble proteins and saponins. The vegan mayo backbone.</li>
+    <li><strong>Mono- and diglycerides</strong> — common food additives derived from plant oils.</li>
+    <li><strong>Mucilage from flax or chia</strong> — polysaccharide-based, brilliant in dressings.</li>
+  </ul>
+
+  <div class="diagram">
+    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" aria-label="Oil-in-water emulsion with emulsifier">
+      <rect x="0" y="0" width="600" height="200" fill="#e2efdc" rx="12"/>
+      <g>
+        <circle cx="120" cy="100" r="40" fill="#d6a83a" opacity="0.85"/>
+        <circle cx="240" cy="80"  r="28" fill="#d6a83a" opacity="0.85"/>
+        <circle cx="320" cy="130" r="35" fill="#d6a83a" opacity="0.85"/>
+        <circle cx="440" cy="90"  r="32" fill="#d6a83a" opacity="0.85"/>
+        <circle cx="520" cy="130" r="22" fill="#d6a83a" opacity="0.85"/>
+        <!-- Emulsifier dots -->
+        <g fill="#36732a">
+          <circle cx="80" cy="100" r="3"/><circle cx="160" cy="100" r="3"/><circle cx="120" cy="60" r="3"/><circle cx="120" cy="140" r="3"/>
+          <circle cx="212" cy="80" r="3"/><circle cx="268" cy="80" r="3"/><circle cx="240" cy="52" r="3"/><circle cx="240" cy="108" r="3"/>
+          <circle cx="285" cy="130" r="3"/><circle cx="355" cy="130" r="3"/><circle cx="320" cy="95" r="3"/><circle cx="320" cy="165" r="3"/>
+          <circle cx="408" cy="90" r="3"/><circle cx="472" cy="90" r="3"/><circle cx="440" cy="58" r="3"/><circle cx="440" cy="122" r="3"/>
+          <circle cx="498" cy="130" r="3"/><circle cx="542" cy="130" r="3"/><circle cx="520" cy="108" r="3"/><circle cx="520" cy="152" r="3"/>
+        </g>
+      </g>
+      <text x="300" y="190" text-anchor="middle" font-family="Georgia,serif" font-style="italic" fill="#36732a" font-size="13">An oil-in-water emulsion: oil droplets, each coated with emulsifier, dispersed in a water phase.</text>
+    </svg>
+  </div>
+</section>
+
+<section id="structuring" class="prose">
+  <h2>Turning a liquid oil into a solid (without hydrogenation)</h2>
+  <p>
+    For most of the 20th century, the way to make a butter-like vegan spread
+    was to <em>hydrogenate</em> a liquid oil — chemically saturating its
+    double bonds until it solidified. The unfortunate side effect was
+    <em>trans fats</em>, now known to harm cardiovascular health and largely
+    banned from food.
+  </p>
+  <p>
+    Modern plant-based butters and shortenings sidestep hydrogenation in
+    several ways:
+  </p>
+  <ul>
+    <li><strong>Blending naturally solid plant fats</strong> (coconut, cocoa butter, shea, palm) with liquid oils to hit a target solid-fat content at the desired temperature.</li>
+    <li><strong>Interesterification</strong> — rearranging the fatty acids on the glycerol backbones to change melting behavior, without creating trans fats.</li>
+    <li><strong>Oleogels</strong> — trapping a liquid oil in a 3-D scaffold of edible "structurants" like waxes (rice bran wax, sunflower wax), ethylcellulose, or even some proteins. The oil stays chemically liquid but behaves like a solid.</li>
+    <li><strong>Crystal templating</strong> — Miyoko's Creamery and others build vegan butters using cultured cashew cream + coconut oil + lecithin, structuring around a controlled crystal of the saturated phase.</li>
+  </ul>
+
+  <blockquote>
+    Vegan butter isn't a single technology — it's a recipe for <em>where</em> the
+    fat is solid and where it isn't. Get that profile right and the rest is flavor.
+  </blockquote>
+</section>
+
+<section id="lab">
+  <div class="lab">
+    <div class="lab__head">
+      <span style="font-size:1.4rem;">🧪</span>
+      <h3>Kitchen Lab #3 — Vegan mayonnaise from aquafaba</h3>
+      <span class="tag">~25 min</span>
+    </div>
+    <div class="lab__body">
+      <h4>What you'll learn</h4>
+      <p>
+        You'll build an oil-in-water emulsion using the proteins and
+        saponins from chickpea brine. The blender's shear breaks oil into
+        microscopic droplets; the aquafaba coats each one and prevents
+        them from rejoining.
+      </p>
+      <h4>You'll need</h4>
+      <ul>
+        <li>60 mL aquafaba (the liquid drained from a can of unsalted chickpeas)</li>
+        <li>250 mL neutral oil (sunflower, grapeseed, refined avocado)</li>
+        <li>1 tsp Dijon mustard</li>
+        <li>1 tsp white-wine or apple-cider vinegar</li>
+        <li>Salt to taste</li>
+        <li>An immersion blender + tall narrow cup, OR a regular blender</li>
+      </ul>
+      <h4>Procedure</h4>
+      <ol>
+        <li>Combine aquafaba, mustard, vinegar, and a pinch of salt in the cup.</li>
+        <li>Pour the oil on top — yes, all of it. Do not stir yet.</li>
+        <li>Set the immersion blender flat on the bottom of the cup. Run at full speed without moving for 15 seconds. You'll see a white emulsion form below the oil.</li>
+        <li>Slowly raise the blender, drawing oil down into the emulsion until it's all incorporated (~30–45 seconds total).</li>
+        <li>Taste. Adjust acid and salt. Refrigerate.</li>
+      </ol>
+      <h4>The science behind it</h4>
+      <p>
+        At rest, oil and water separate by gravity. The blender's blade
+        creates such intense shear that oil droplets break down to micron
+        scale — and aquafaba's surface-active molecules (small proteins,
+        saponins) wrap each droplet in a stabilizing shell faster than they
+        can recombine. Mustard reinforces the emulsion with its own mucilage,
+        and the vinegar lowers pH to extend shelf life.
+      </p>
+      <h4>Diagnostic: a broken emulsion</h4>
+      <p>
+        If your mayo splits — fix it. Pour a fresh tablespoon of aquafaba
+        into a clean cup, then slowly drizzle the broken mixture in while
+        blending. You're starting a fresh emulsion and "lending" it the
+        broken oil at a rate it can stabilize.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="quiz" data-quiz-id="m3">
+    <h3 class="quiz__title">Self-check</h3>
+
+    <div class="quiz-q" data-answer="0">
+      <div class="quiz-q__q">1. Why is coconut oil solid at room temperature?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Its fatty acids are highly saturated, so the chains pack tightly.</label>
+        <label class="quiz-opt"><input type="radio"> It's an emulsion of water and oil.</label>
+        <label class="quiz-opt"><input type="radio"> It contains a high proportion of polyunsaturated fats.</label>
+        <label class="quiz-opt"><input type="radio"> It is hydrogenated during processing.</label>
+      </div>
+      <div class="quiz-q__exp">Coconut oil is rich in lauric acid, a saturated fatty acid. Saturated chains lack the kinks that prevent close packing, so they crystallize at higher temperatures.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="2">
+      <div class="quiz-q__q">2. A vegan butter spread is best described as which kind of emulsion?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Oil-in-water (O/W)</label>
+        <label class="quiz-opt"><input type="radio"> Foam-in-oil</label>
+        <label class="quiz-opt"><input type="radio"> Water-in-oil (W/O)</label>
+        <label class="quiz-opt"><input type="radio"> A simple solution</label>
+      </div>
+      <div class="quiz-q__exp">Butter-like spreads have a continuous fat phase with water droplets dispersed in it — the opposite of a vinaigrette or plant milk.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <div class="quiz-q__q">3. Smoke point depends on all of the following EXCEPT:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> The oil's degree of refinement.</label>
+        <label class="quiz-opt"><input type="radio"> Free fatty acid content.</label>
+        <label class="quiz-opt"><input type="radio"> Whether the oil has been previously used for frying.</label>
+        <label class="quiz-opt"><input type="radio"> The color of the bottle.</label>
+      </div>
+      <div class="quiz-q__exp">Refinement, age, and prior use all matter. Bottle color affects shelf life (light accelerates oxidation) but not smoke point directly.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <div class="quiz-q__q">4. An oleogel is:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> A water-based gel containing oil droplets.</label>
+        <label class="quiz-opt"><input type="radio"> A liquid oil trapped in a 3-D structurant network so it behaves like a solid.</label>
+        <label class="quiz-opt"><input type="radio"> Hydrogenated palm oil.</label>
+        <label class="quiz-opt"><input type="radio"> Another name for an emulsion.</label>
+      </div>
+      <div class="quiz-q__exp">Oleogels are an exciting modern tool — using waxes, ethylcellulose, or proteins to give liquid oils butter-like behavior without hydrogenation or saturated fats.</div>
+    </div>
+
+    <div class="quiz__actions">
+      <button class="btn btn--primary" data-action="quiz-check">Check answers</button>
+      <button class="btn btn--ghost" data-action="quiz-reset">Reset</button>
+      <span class="quiz__score" data-quiz-score></span>
+    </div>
+  </div>
+</section>

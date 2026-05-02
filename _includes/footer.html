@@ -1,0 +1,43 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <a href="{{ '/' | relative_url }}" class="brand" style="margin-bottom:.6rem; display:inline-flex;">
+          <span class="brand__mark">P</span>
+          <span>The Plant Lab</span>
+        </a>
+        <p class="muted" style="max-width:38ch;">
+          An open, hands-on curriculum in vegan food science. Built for cooks,
+          curious eaters, and anyone who has ever wondered <em>why</em> a chickpea foams.
+        </p>
+      </div>
+      <div>
+        <h4>Course</h4>
+        <ul>
+          <li><a href="{{ '/curriculum/' | relative_url }}">Curriculum</a></li>
+          <li><a href="{{ '/labs/' | relative_url }}">Kitchen Labs</a></li>
+          <li><a href="{{ '/modules/01-foundations/' | relative_url }}">Start Module 1</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reference</h4>
+        <ul>
+          <li><a href="{{ '/glossary/' | relative_url }}">Glossary</a></li>
+          <li><a href="{{ '/resources/' | relative_url }}">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="{{ '/about/' | relative_url }}">About the course</a></li>
+          <li><a href="https://github.com/sbezner/veganfoodscience" rel="noopener">Source on GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© The Plant Lab — released under CC BY-SA 4.0.</span>
+      <span>Made with curiosity, koji, and a kitchen scale.</span>
+    </div>
+  </div>
+</footer>
+<script src="{{ '/js/app.js' | relative_url }}" defer></script>

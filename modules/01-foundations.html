@@ -1,0 +1,300 @@
+---
+layout: module
+title: "Foundations of Plant-Based Food Chemistry"
+permalink: /modules/01-foundations/
+module_id: m01
+module_num: "01"
+duration: "≈ 4 hours"
+level: "Intro"
+lede: "Before we cook a single bean, we need a shared map. In this module you'll learn the four molecules that make up almost everything you eat, why water is the silent main character, and how to think about cooking as a controllable chemical process."
+tags:
+  - { label: "Foundations", cls: "" }
+  - { label: "Theory", cls: "pill--berry" }
+sections:
+  - { id: "objectives", label: "Learning objectives" }
+  - { id: "molecules", label: "The four molecules of food" }
+  - { id: "water", label: "Water — the silent main character" }
+  - { id: "method", label: "Cooking as controlled chemistry" }
+  - { id: "lab", label: "Kitchen Lab #1" }
+  - { id: "quiz", label: "Self-check" }
+next: { url: "/modules/02-proteins/", title: "Plant Proteins" }
+---
+
+<section id="objectives" class="prose">
+  <h2>Learning objectives</h2>
+  <ul>
+    <li>Name the four macromolecule classes that compose nearly all food, and give a plant-based example of each.</li>
+    <li>Explain water activity (<em>a<sub>w</sub></em>) and why it matters for safety, texture, and shelf life.</li>
+    <li>Describe at least three reactions that occur during cooking, and what controls them.</li>
+    <li>Approach a recipe like a scientist: hypothesis, variable, observation, iteration.</li>
+  </ul>
+</section>
+
+<section id="molecules" class="prose">
+  <h2>The four molecules of food</h2>
+  <p>
+    Nearly everything you eat is built from four classes of molecules:
+    <strong>water</strong>, <strong>carbohydrates</strong>, <strong>proteins</strong>, and <strong>lipids</strong>.
+    Add a sprinkling of micronutrients (vitamins, minerals) and a few thousand
+    flavor and aroma compounds, and you have the entire pantry of life.
+  </p>
+  <p>
+    A useful way to look at any food — a cashew, a chickpea, a stalk of broccoli — is
+    to ask: <em>which of these dominates, and how is it arranged?</em>
+  </p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Class</th><th>What it does</th><th>Plant examples</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Water</td><td>Solvent, heat carrier, structural medium</td><td>Cucumber (95%), tomato, leafy greens</td></tr>
+        <tr><td>Carbohydrates</td><td>Energy, structure, gelling, browning</td><td>Rice, oats, apples, agar, cassava starch</td></tr>
+        <tr><td>Proteins</td><td>Build structure, hold water, brown, foam</td><td>Soy, lentils, peas, seitan, chickpeas</td></tr>
+        <tr><td>Lipids (fats)</td><td>Carry flavor, store energy, build mouthfeel</td><td>Olives, avocado, nuts, cocoa butter, coconut</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>
+    A potato is mostly water and starch. A walnut is mostly fat and protein.
+    A black bean is mostly carbohydrate and protein. Once you learn the
+    behavior of each macromolecule under heat, water, salt, acid, and time,
+    you can reason about a food you've never cooked before.
+  </p>
+
+  <div class="callout callout--key">
+    <div class="callout__title">🧠 Mental model</div>
+    <p style="margin:0;">
+      Don't memorize recipes — model ingredients. Ask: <em>what's the dominant
+      macromolecule, and what do I want it to do?</em>
+    </p>
+  </div>
+
+  <h3>Carbohydrates, very briefly</h3>
+  <p>
+    Three things to know now: simple sugars (glucose, fructose, sucrose) are
+    sweet and brown easily; starches (chains of glucose) thicken when heated
+    in water (<em>gelatinization</em>) and harden again as they cool
+    (<em>retrogradation</em>); fibers and gums (cellulose, pectin, etc.)
+    create structure and gels.
+  </p>
+
+  <h3>Proteins, very briefly</h3>
+  <p>
+    Proteins are folded chains of amino acids. Heat, acid, salt, and
+    mechanical force can <em>denature</em> them — unfolding the chain — and
+    <em>coagulate</em> them — re-bonding into new networks. Almost every
+    plant-based food technology, from tofu to seitan to whipped aquafaba,
+    is a story about denaturing and reorganizing proteins.
+  </p>
+
+  <h3>Lipids, very briefly</h3>
+  <p>
+    Fats are two things at once: a carrier of fat-soluble flavor compounds
+    and a builder of texture. They lubricate, they melt at specific
+    temperatures, and they form droplets dispersed in water — emulsions —
+    when stabilized by the right molecules.
+  </p>
+</section>
+
+<section id="water" class="prose">
+  <h2>Water — the silent main character</h2>
+  <p>
+    Most foods are mostly water. Even a "dry" cookie is around 4–6% water,
+    and a fresh leaf of basil is more than 90%. Water is the solvent in
+    which almost every food reaction takes place. Two facts will guide you
+    for the rest of the course:
+  </p>
+  <ol>
+    <li><strong>Heat travels through water faster than through air.</strong> A 100 °C boiling pot cooks much faster than a 100 °C oven, because water carries about 25× more heat per unit volume.</li>
+    <li><strong>Microbes need water to grow.</strong> Specifically, they need <em>available</em> water — water not bound up by sugars, salts, or proteins.</li>
+  </ol>
+
+  <h3>Water activity (<em>a<sub>w</sub></em>)</h3>
+  <p>
+    <em>Water activity</em> is the proportion of water in a food that
+    is "free" — chemically available to microbes and to reactions. Pure
+    water has an <em>a<sub>w</sub></em> of 1.0; a desert-dry cracker can
+    sit around 0.3.
+  </p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th><em>a<sub>w</sub></em></th><th>What can grow?</th><th>Plant-based example</th></tr></thead>
+      <tbody>
+        <tr><td>0.95–1.00</td><td>Most bacteria, including pathogens</td><td>Fresh tofu, plant milk, cooked grains</td></tr>
+        <tr><td>0.85–0.95</td><td>Many yeasts and molds</td><td>Soft fermented vegan cheeses, hummus</td></tr>
+        <tr><td>0.60–0.85</td><td>Halophilic bacteria, xerophilic molds</td><td>Miso, soy sauce, dried fruit, jam</td></tr>
+        <tr><td>&lt; 0.60</td><td>Almost nothing grows</td><td>Nuts, dried legumes, crackers, spices</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--note">
+    <div class="callout__title">Why salt and sugar preserve</div>
+    <p style="margin:0;">
+      Salt and sugar bind water molecules through their charges and polarity,
+      effectively pulling water away from microbes. They <em>lower water
+      activity</em>. This is why miso (very salty) and jam (very sugary)
+      keep for months without refrigeration.
+    </p>
+  </div>
+</section>
+
+<section id="method" class="prose">
+  <h2>Cooking as controlled chemistry</h2>
+  <p>
+    A useful way to look at any technique is to identify which reactions
+    are happening, and which lever — temperature, time, water content, pH,
+    mechanical action — controls each. Five reactions you'll meet again
+    and again:
+  </p>
+
+  <h3>1. Maillard browning</h3>
+  <p>
+    Reducing sugars + amino acids + heat → hundreds of new flavor and color
+    compounds. Starts seriously around 140 °C / 285 °F. This is what gives
+    bread its crust, coffee its depth, and seared tofu its crusty exterior.
+    Maillard <em>needs</em> protein and sugar in close contact — and a dry
+    surface, because boiling water caps temperature at 100 °C.
+  </p>
+
+  <h3>2. Caramelization</h3>
+  <p>
+    Sugar alone, heated past its melting point, breaks apart into bittersweet
+    aroma compounds. Distinct from Maillard: no nitrogen needed.
+  </p>
+
+  <h3>3. Gelatinization</h3>
+  <p>
+    Starch granules absorb water when heated, swell, and burst — releasing
+    amylose and amylopectin into solution and thickening the liquid.
+    Happens between roughly 60 °C and 80 °C, varying by starch source.
+  </p>
+
+  <h3>4. Protein denaturation & coagulation</h3>
+  <p>
+    Heat (or acid, or salt) unfolds proteins; they then re-bond into a
+    network. This is what turns soy milk into tofu, aquafaba into a stable
+    foam, and mung bean liquid into a scrambled-egg analogue.
+  </p>
+
+  <h3>5. Emulsification</h3>
+  <p>
+    Oil and water don't mix — but a third molecule with a "loves water"
+    end and a "loves oil" end (an emulsifier) can hold the two phases
+    together. Lecithin in soy and sunflower, mustard powder, mucilage in
+    flax — all natural plant emulsifiers.
+  </p>
+
+  <blockquote>
+    A recipe is a frozen experiment. To learn to cook is to thaw the
+    experiment back out — to ask what every step is <em>for</em>, and what
+    happens if you change it.
+  </blockquote>
+</section>
+
+<section id="lab">
+  <div class="lab">
+    <div class="lab__head">
+      <span style="font-size:1.4rem;">🧪</span>
+      <h3>Kitchen Lab #1 — A water activity tasting</h3>
+      <span class="tag">~30 min</span>
+    </div>
+    <div class="lab__body">
+      <h4>What you'll do</h4>
+      <p>
+        You'll create three simple "foods" with very different water activities,
+        observe how they behave over a week, and feel why preservation is fundamentally about <em>controlling water</em>.
+      </p>
+      <h4>You'll need</h4>
+      <ul>
+        <li>3 small glass jars with lids</li>
+        <li>A digital scale</li>
+        <li>1 fresh apple (cut into 3 equal cubes ~2 cm)</li>
+        <li>Granulated sugar, salt</li>
+      </ul>
+      <h4>Procedure</h4>
+      <ol>
+        <li>Weigh each apple cube and record the mass.</li>
+        <li><strong>Jar A (control):</strong> apple cube alone.</li>
+        <li><strong>Jar B (sugar):</strong> apple cube buried in granulated sugar.</li>
+        <li><strong>Jar C (salt):</strong> apple cube buried in salt.</li>
+        <li>Seal all three. Leave on the counter, out of direct light.</li>
+        <li>After 24 h, 3 d, and 7 d: open, observe, and re-weigh the cubes (rinse off the sugar/salt and pat dry first).</li>
+      </ol>
+      <h4>What to notice</h4>
+      <ul>
+        <li>Which cube lost the most water? How quickly?</li>
+        <li>Does the control mold first? Why?</li>
+        <li>How does texture change in each case?</li>
+      </ul>
+      <h4>The science behind it</h4>
+      <p>
+        Sugar and salt pull water out of the apple's cells through osmosis.
+        That water moves down its concentration gradient — out of the cells,
+        into the surrounding sugar/salt — leaving the apple firmer, sweeter
+        or saltier, and dramatically less hospitable to microbes. You've just
+        replicated the principle behind candied fruit, salt-cured vegetables,
+        and shelf-stable jams.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="quiz" data-quiz-id="m1">
+    <h3 class="quiz__title">Self-check</h3>
+
+    <div class="quiz-q" data-answer="2">
+      <div class="quiz-q__q">1. Which of these is NOT one of the four major classes of food molecules?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Water</label>
+        <label class="quiz-opt"><input type="radio"> Carbohydrates</label>
+        <label class="quiz-opt"><input type="radio"> Vitamins</label>
+        <label class="quiz-opt"><input type="radio"> Lipids</label>
+      </div>
+      <div class="quiz-q__exp">Vitamins are essential micronutrients but contribute almost no mass to most foods. The four macromolecule classes are water, carbohydrates, proteins, and lipids.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <div class="quiz-q__q">2. A salty miso sits at <em>a<sub>w</sub></em> ≈ 0.75. What does that imply?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Few microbes can grow in it — it's shelf-stable.</label>
+        <label class="quiz-opt"><input type="radio"> It's mostly water and will spoil quickly.</label>
+        <label class="quiz-opt"><input type="radio"> It's at the same water activity as fresh tofu.</label>
+        <label class="quiz-opt"><input type="radio"> It can never undergo enzymatic browning.</label>
+      </div>
+      <div class="quiz-q__exp">Below ~0.85, only a narrow band of yeasts, molds, and halophilic bacteria can grow — which is exactly why miso ages safely on a shelf.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="1">
+      <div class="quiz-q__q">3. Why won't your tofu brown nicely in a wet, simmering pan?</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Tofu lacks proteins.</label>
+        <label class="quiz-opt"><input type="radio"> Boiling water keeps the surface at 100 °C — too cool for Maillard browning.</label>
+        <label class="quiz-opt"><input type="radio"> Soy proteins can't undergo Maillard reactions.</label>
+        <label class="quiz-opt"><input type="radio"> Tofu has no reducing sugars.</label>
+      </div>
+      <div class="quiz-q__exp">Maillard browning needs both heat (≈140 °C+) and a dry-ish surface so temperature can climb above water's boiling point. Press your tofu, dry the surface, and use a hot dry pan.</div>
+    </div>
+
+    <div class="quiz-q" data-answer="3">
+      <div class="quiz-q__q">4. Gelatinization refers to:</div>
+      <div class="quiz-q__opts">
+        <label class="quiz-opt"><input type="radio"> Proteins forming a network when heated.</label>
+        <label class="quiz-opt"><input type="radio"> Sugar melting and browning.</label>
+        <label class="quiz-opt"><input type="radio"> Oil droplets being held in water by an emulsifier.</label>
+        <label class="quiz-opt"><input type="radio"> Starch granules absorbing water, swelling, and bursting.</label>
+      </div>
+      <div class="quiz-q__exp">Gelatinization is a starch story: the granules swell and rupture, releasing amylose into solution. This is how a roux thickens a sauce.</div>
+    </div>
+
+    <div class="quiz__actions">
+      <button class="btn btn--primary" data-action="quiz-check">Check answers</button>
+      <button class="btn btn--ghost" data-action="quiz-reset">Reset</button>
+      <span class="quiz__score" data-quiz-score></span>
+    </div>
+  </div>
+</section>
