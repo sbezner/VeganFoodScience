@@ -1,0 +1,473 @@
+# Question bank for the spaced-repetition Review page.
+# `key` matches what the in-module quizzes report to localStorage:
+#   `${quizId}:${questionIndex}` (zero-based, in the order they appear).
+# These should stay in sync with the quizzes authored inside each module page.
+
+- key: "m1:0"
+  module: "Module 1 — Foundations"
+  q: "Which of these is NOT one of the four major classes of food molecules?"
+  opts: ["Water", "Carbohydrates", "Vitamins", "Lipids"]
+  answer: 2
+  explain: "Vitamins are essential micronutrients but contribute almost no mass to most foods. The four macromolecule classes are water, carbohydrates, proteins, and lipids."
+
+- key: "m1:1"
+  module: "Module 1 — Foundations"
+  q: "A salty miso sits at a<sub>w</sub> ≈ 0.75. What does that imply?"
+  opts:
+    - "Few microbes can grow in it — it's shelf-stable."
+    - "It's mostly water and will spoil quickly."
+    - "It's at the same water activity as fresh tofu."
+    - "It can never undergo enzymatic browning."
+  answer: 0
+  explain: "Below ~0.85, only a narrow band of yeasts, molds, and halophilic bacteria can grow — which is exactly why miso ages safely on a shelf."
+
+- key: "m1:2"
+  module: "Module 1 — Foundations"
+  q: "Why won't your tofu brown nicely in a wet, simmering pan?"
+  opts:
+    - "Tofu lacks proteins."
+    - "Boiling water keeps the surface at 100 °C — too cool for Maillard browning."
+    - "Soy proteins can't undergo Maillard reactions."
+    - "Tofu has no reducing sugars."
+  answer: 1
+  explain: "Maillard browning needs both heat (≈140 °C+) and a dry-ish surface so temperature can climb above water's boiling point. Press your tofu, dry the surface, and use a hot dry pan."
+
+- key: "m1:3"
+  module: "Module 1 — Foundations"
+  q: "Gelatinization refers to:"
+  opts:
+    - "Proteins forming a network when heated."
+    - "Sugar melting and browning."
+    - "Oil droplets being held in water by an emulsifier."
+    - "Starch granules absorbing water, swelling, and bursting."
+  answer: 3
+  explain: "Gelatinization is a starch story: the granules swell and rupture, releasing amylose into solution. This is how a roux thickens a sauce."
+
+- key: "m2:0"
+  module: "Module 2 — Plant Proteins"
+  q: "The 'isoelectric point' of a protein is:"
+  opts:
+    - "The temperature at which it gels."
+    - "The temperature at which it denatures."
+    - "The pH at which it carries no net charge and tends to aggregate."
+    - "The pH at which it dissolves most readily."
+  answer: 2
+  explain: "At its isoelectric point, a protein has no net electrical charge. Without electrostatic repulsion, neighboring molecules clump together — the basis of acid-set curds."
+
+- key: "m2:1"
+  module: "Module 2 — Plant Proteins"
+  q: "Which is the typical limiting amino acid in cereal grains like wheat and rice?"
+  opts: ["Methionine", "Lysine", "Tryptophan", "Valine"]
+  answer: 1
+  explain: "Cereals are typically low in lysine, while legumes are typically low in methionine. They complement each other naturally — hence the global ubiquity of grain + legume dishes."
+
+- key: "m2:2"
+  module: "Module 2 — Plant Proteins"
+  q: "A 'soy protein isolate' is roughly what % protein by mass?"
+  opts: ["~25%", "~50%", "~70%", "≥ 85%"]
+  answer: 3
+  explain: "Isolates are stripped of nearly all carbohydrates and fats. The result is ≥ 85–90% protein."
+
+- key: "m2:3"
+  module: "Module 2 — Plant Proteins"
+  q: "Aquafaba's whipping ability comes primarily from:"
+  opts:
+    - "Saponins and small soluble proteins parking at the air–water interface."
+    - "Starch granules trapping bubbles in their swollen state."
+    - "Sugar dissolving and lowering surface tension."
+    - "Salt denaturing the protein chains."
+  answer: 0
+  explain: "Aquafaba foams thanks to surface-active components — saponins and small soluble proteins — that stabilize the air–water interface of each bubble."
+
+- key: "m3:0"
+  module: "Module 3 — Fats and Oils"
+  q: "Why is coconut oil solid at room temperature?"
+  opts:
+    - "Its fatty acids are highly saturated, so the chains pack tightly."
+    - "It's an emulsion of water and oil."
+    - "It contains a high proportion of polyunsaturated fats."
+    - "It is hydrogenated during processing."
+  answer: 0
+  explain: "Coconut oil is rich in lauric acid, a saturated fatty acid. Saturated chains lack the kinks that prevent close packing, so they crystallize at higher temperatures."
+
+- key: "m3:1"
+  module: "Module 3 — Fats and Oils"
+  q: "A vegan butter spread is best described as which kind of emulsion?"
+  opts: ["Oil-in-water (O/W)", "Foam-in-oil", "Water-in-oil (W/O)", "A simple solution"]
+  answer: 2
+  explain: "Butter-like spreads have a continuous fat phase with water droplets dispersed in it — the opposite of a vinaigrette or plant milk."
+
+- key: "m3:2"
+  module: "Module 3 — Fats and Oils"
+  q: "Smoke point depends on all of the following EXCEPT:"
+  opts:
+    - "The oil's degree of refinement."
+    - "Free fatty acid content."
+    - "Whether the oil has been previously used for frying."
+    - "The color of the bottle."
+  answer: 3
+  explain: "Refinement, age, and prior use all matter. Bottle color affects shelf life (light accelerates oxidation) but not smoke point directly."
+
+- key: "m3:3"
+  module: "Module 3 — Fats and Oils"
+  q: "An oleogel is:"
+  opts:
+    - "A water-based gel containing oil droplets."
+    - "A liquid oil trapped in a 3-D structurant network so it behaves like a solid."
+    - "Hydrogenated palm oil."
+    - "Another name for an emulsion."
+  answer: 1
+  explain: "Oleogels use waxes, ethylcellulose, or proteins to give liquid oils butter-like behavior without hydrogenation or saturated fats."
+
+- key: "m4:0"
+  module: "Module 4 — Hydrocolloids"
+  q: "Which property makes methylcellulose so useful in plant-based burgers?"
+  opts:
+    - "It's the cheapest hydrocolloid."
+    - "It thickens cold water dramatically."
+    - "It gels when heated and melts when cooled — opposite of most gels."
+    - "It carries umami flavor."
+  answer: 2
+  explain: "Methylcellulose's heat-set behavior holds a plant patty together on the grill, mimicking the way animal protein coagulates as it cooks."
+
+- key: "m4:1"
+  module: "Module 4 — Hydrocolloids"
+  q: "Why does bread go stale even in a sealed bag?"
+  opts:
+    - "Amylose chains slowly re-associate into a partially crystalline structure (retrogradation)."
+    - "The water completely evaporates."
+    - "The yeast continues to ferment."
+    - "Mold grows invisibly inside the loaf."
+  answer: 0
+  explain: "Retrogradation is internal: water doesn't leave, but starch chains crystallize. Reheating partially reverses the process — briefly."
+
+- key: "m4:2"
+  module: "Module 4 — Hydrocolloids"
+  q: "Which hydrocolloid pair is used together because of their classic synergy?"
+  opts: ["Agar + alginate", "Xanthan + locust bean gum", "Pectin + carrageenan", "Konjac + agar"]
+  answer: 1
+  explain: "Neither xanthan nor locust bean gum gels alone, but together they form a soft elastic gel — invaluable in vegan ice cream and cream cheese."
+
+- key: "m4:3"
+  module: "Module 4 — Hydrocolloids"
+  q: "To set spherical orange 'caviar' using sodium alginate, what ion do you drop the spheres into?"
+  opts: ["Sodium", "Potassium", "Magnesium", "Calcium"]
+  answer: 3
+  explain: "Calcium ions cross-link alginate chains via the 'egg-box' model, gelling the surface on contact. The interior stays liquid — that signature burst."
+
+- key: "m5:0"
+  module: "Module 5 — Fermentation"
+  q: "Which microbe is the cornerstone of soy sauce, miso, and sake?"
+  opts:
+    - "Saccharomyces cerevisiae"
+    - "Aspergillus oryzae (koji)"
+    - "Rhizopus oligosporus"
+    - "Lactobacillus plantarum"
+  answer: 1
+  explain: "Koji's enzymatic toolkit — proteases, amylases, lipases — is the engine that breaks soybeans and rice down into the molecules of umami."
+
+- key: "m5:1"
+  module: "Module 5 — Fermentation"
+  q: "Why does sauerkraut work safely without refrigeration during fermentation?"
+  opts:
+    - "The cabbage is sterilized first."
+    - "Vinegar is added at the start."
+    - "Cold weather selects against bacteria."
+    - "Salt + anaerobic brine select for LAB, which acidify the cabbage to a pH most pathogens cannot survive."
+  answer: 3
+  explain: "It's not that sauerkraut 'kills' pathogens — the conditions favor LAB so quickly that competition shuts the others out, while the falling pH locks in safety."
+
+- key: "m5:2"
+  module: "Module 5 — Fermentation"
+  q: "The umami of miso comes mostly from:"
+  opts:
+    - "Free glutamate liberated from soy proteins by koji's proteases."
+    - "Added MSG."
+    - "Ethanol from yeasts."
+    - "Lactic acid from LAB."
+  answer: 0
+  explain: "Koji's proteases slowly liberate amino acids from the soy proteins — particularly free glutamate, the molecule we taste as umami."
+
+- key: "m5:3"
+  module: "Module 5 — Fermentation"
+  q: "Why can plant-based cheese sometimes melt and stretch like mozzarella?"
+  opts:
+    - "It contains hidden caseins."
+    - "Coconut oil melts at body temperature."
+    - "Tapioca starch (and other hydrocolloids) builds a stretchy network when heated and hydrated."
+    - "It's mostly methylcellulose."
+  answer: 2
+  explain: "Most fast vegan cheeses use a blend of starches and gums — tapioca for stretch, kappa-carrageenan for melt — to mimic the rheology of dairy cheese under heat."
+
+- key: "m6:0"
+  module: "Module 6 — Texturization"
+  q: "'Anisotropy' in plant meat refers to:"
+  opts:
+    - "An additive that tenderizes plant protein."
+    - "A type of bacteria used in fermentation."
+    - "Direction-dependent structure — like meat that pulls apart along the grain."
+    - "A measure of moisture content."
+  answer: 2
+  explain: "Anisotropic materials behave differently along different axes. A real steak pulls apart easily one way and resists the other — the goal of HMMA and shear-cell technology."
+
+- key: "m6:1"
+  module: "Module 6 — Texturization"
+  q: "The cooling die in HMMA does what?"
+  opts:
+    - "Adds flavor to the protein."
+    - "Aligns flowing protein into fibrous, layered structure as it cools."
+    - "Sterilizes the product."
+    - "Hydrogenates the fats."
+  answer: 1
+  explain: "A long cooling die holds the protein melt in steady laminar flow while it solidifies, building the aligned fiber structure that defines an HMMA fillet."
+
+- key: "m6:2"
+  module: "Module 6 — Texturization"
+  q: "Which of these is mycelium-based, not extruded?"
+  opts: ["Beyond Burger", "Impossible Sausage", "TVP crumbles", "Quorn / Meati products"]
+  answer: 3
+  explain: "Quorn pioneered mycelium 'mycoprotein' decades ago; Meati and others continue the tradition of growing fibrous structure naturally."
+
+- key: "m6:3"
+  module: "Module 6 — Texturization"
+  q: "Cultivated meat (animal cells in bioreactors) is:"
+  opts: ["Not vegan, by definition.", "A type of mycelium.", "Always cheaper than plant meat.", "Made by extrusion."]
+  answer: 0
+  explain: "Cultivated meat is real animal tissue, just grown outside an animal — not vegan in the standard sense."
+
+- key: "m7:0"
+  module: "Module 7 — Flavor and Sensory"
+  q: "The vast majority of 'flavor' is actually:"
+  opts:
+    - "Detected by taste buds on the tongue."
+    - "A trigeminal sensation."
+    - "Aroma — volatile molecules detected by the nose."
+    - "Mouthfeel."
+  answer: 2
+  explain: "Pinch your nose and bite anything sweet — you'll get sweetness, but the recognizable identity vanishes. The vast majority of flavor lives in olfaction."
+
+- key: "m7:1"
+  module: "Module 7 — Flavor and Sensory"
+  q: "Umami synergy refers to:"
+  opts:
+    - "The super-additive response when glutamate is paired with a 5'-ribonucleotide."
+    - "Combining sweet and salty for a balanced flavor."
+    - "Using two cooking methods on the same ingredient."
+    - "Adding salt to enhance umami."
+  answer: 0
+  explain: "5'-IMP and 5'-GMP cooperate with glutamate at the umami receptor, producing an effect 8–15× stronger than either alone."
+
+- key: "m7:2"
+  module: "Module 7 — Flavor and Sensory"
+  q: "Maillard browning is fundamentally a reaction between:"
+  opts:
+    - "Two sugars under heat."
+    - "A reducing sugar and an amino acid under heat."
+    - "Fat and water at high temperature."
+    - "A protein and an enzyme."
+  answer: 1
+  explain: "Maillard requires both a reducing sugar and an amine — usually an amino acid. Caramelization, by contrast, is sugar alone."
+
+- key: "m7:3"
+  module: "Module 7 — Flavor and Sensory"
+  q: "A triangle test is used to:"
+  opts:
+    - "Measure how much consumers like a product."
+    - "Score the intensity of specific flavor attributes."
+    - "Train new sensory panelists."
+    - "Detect whether two products are perceptibly different."
+  answer: 3
+  explain: "Triangle tests are discrimination tests: identify the odd sample. Statistical thresholds tell you whether a reformulation is 'the same as before' to consumers."
+
+- key: "m8:0"
+  module: "Module 8 — Eggs and Dairy"
+  q: "Kala namak is essential for vegan 'eggy' flavor because:"
+  opts:
+    - "It's higher in sodium."
+    - "It contains turmeric."
+    - "It contains sulfur compounds (notably hydrogen sulfide) that read as cooked egg."
+    - "It's a fermented salt."
+  answer: 2
+  explain: "The volatile sulfur in kala namak overlaps closely with the sulfur signature of cooked yolks. A pinch is the difference between scrambled tofu and scrambled 'eggs.'"
+
+- key: "m8:1"
+  module: "Module 8 — Eggs and Dairy"
+  q: "Why does almond milk often split in hot coffee?"
+  opts:
+    - "It has very little protein, so its colloid is destabilized by coffee's acidity."
+    - "It boils at a lower temperature."
+    - "It contains caffeine that reacts with coffee."
+    - "It's pasteurized."
+  answer: 0
+  explain: "Almond milk has roughly 1 g of protein per cup. Acidic coffee drops the pH below the protein's stability range, and the suspension breaks. Barista milks include buffers and extra emulsifiers."
+
+- key: "m8:2"
+  module: "Module 8 — Eggs and Dairy"
+  q: "The best replacement for egg whites whipped into peaks is:"
+  opts: ["Mashed banana", "Flax egg", "Silken tofu", "Aquafaba"]
+  answer: 3
+  explain: "Aquafaba's saponins and small soluble proteins stabilize air–water interfaces — making it the gold standard for vegan meringues, macarons, and mousses."
+
+- key: "m8:3"
+  module: "Module 8 — Eggs and Dairy"
+  q: "A vegan butter is best classified as:"
+  opts: ["An oil-in-water emulsion.", "A water-in-oil emulsion.", "A foam.", "A solution."]
+  answer: 1
+  explain: "Like dairy butter, vegan spreads are W/O — fat-continuous with small water droplets."
+
+- key: "m9:0"
+  module: "Module 9 — Nutrition"
+  q: "Which of these MUST a strictly vegan diet supplement (or get from fortified foods)?"
+  opts: ["Vitamin B12", "Lysine", "Vitamin C", "Magnesium"]
+  answer: 0
+  explain: "B12 has no reliable plant source. Supplementation or fortified foods is essential."
+
+- key: "m9:1"
+  module: "Module 9 — Nutrition"
+  q: "To boost absorption of iron from a lentil meal, the most useful pairing is:"
+  opts:
+    - "A glass of milk"
+    - "A cup of black tea"
+    - "A side of bell peppers (or any vitamin-C-rich food)"
+    - "A handful of dried fruit"
+  answer: 2
+  explain: "Vitamin C dramatically increases non-heme iron absorption — often 3–4×. Tea and calcium-rich foods do the opposite."
+
+- key: "m9:2"
+  module: "Module 9 — Nutrition"
+  q: "The original source of long-chain omega-3s (DHA, EPA) is:"
+  opts: ["Fish liver", "Microalgae", "Cattle fat", "Olive trees"]
+  answer: 1
+  explain: "Fish accumulate DHA and EPA by eating microalgae (or eating other fish that ate microalgae). Algal-oil supplements skip the middleman."
+
+- key: "m9:3"
+  module: "Module 9 — Nutrition"
+  q: "Phytic acid in legumes and whole grains:"
+  opts:
+    - "Is destroyed entirely by cooking."
+    - "Has no effect on mineral absorption."
+    - "Is concentrated in the protein fraction."
+    - "Is reduced significantly by soaking, sprouting, and fermentation."
+  answer: 3
+  explain: "Soaking, sprouting, and fermentation (especially sourdough and tempeh) all degrade phytate, freeing more iron, zinc, and calcium for absorption."
+
+- key: "m10:0"
+  module: "Module 10 — Sustainability"
+  q: "The largest single category of land use globally is:"
+  opts:
+    - "Cities and infrastructure."
+    - "Forests for timber."
+    - "Agriculture, of which most is grazing or feed for livestock."
+    - "Cropland for direct human food."
+  answer: 2
+  explain: "Roughly half of all habitable land is agricultural, and about three-quarters of that is for animals."
+
+- key: "m10:1"
+  module: "Module 10 — Sustainability"
+  q: "Why are ruminants (cattle, sheep) especially impactful for climate?"
+  opts:
+    - "Enteric fermentation produces methane, a potent greenhouse gas."
+    - "They primarily eat soybeans flown from Brazil."
+    - "Their water consumption is the highest of any species."
+    - "They can't be raised pasture-based."
+  answer: 0
+  explain: "Methane from enteric fermentation, combined with low feed-conversion efficiency and high land use, makes ruminants the heaviest-footprint food."
+
+- key: "m10:2"
+  module: "Module 10 — Sustainability"
+  q: "The 'soy = deforestation' complaint is most accurately about:"
+  opts:
+    - "Soy eaten directly as tofu and soymilk."
+    - "Soy grown to feed livestock — the dominant use globally."
+    - "Soy oil used in cosmetics."
+    - "Soy used for biofuels exclusively."
+  answer: 1
+  explain: "~75–80% of global soy is grown for animal feed. Eating soy directly bypasses one trophic level."
+
+- key: "m10:3"
+  module: "Module 10 — Sustainability"
+  q: "Poore & Nemecek (2018) found a global plant-based shift could:"
+  opts:
+    - "Have no measurable benefit if local."
+    - "Help land but increase water use."
+    - "Be inconclusive."
+    - "Reduce farmland use by ~75% globally and substantially reduce GHG emissions."
+  answer: 3
+  explain: "The headline finding remains striking: a global plant-based shift could free roughly 3.1 billion hectares — an area about the size of Africa."
+
+- key: "m11:0"
+  module: "Module 11 — Frontier"
+  q: "Precision fermentation produces:"
+  opts:
+    - "Whole animal cells."
+    - "Plant proteins."
+    - "Specific target proteins, by programming microbes to express them."
+    - "Vegan cheese using only plant-derived ingredients."
+  answer: 2
+  explain: "Precision fermentation programs microbes (yeast, fungi, bacteria) to make a specific protein at scale."
+
+- key: "m11:1"
+  module: "Module 11 — Frontier"
+  q: "Cultivated meat is best understood as:"
+  opts:
+    - "Real animal tissue grown outside an animal — not vegan."
+    - "A new mycelium product."
+    - "A 3-D-printed extruded plant protein."
+    - "A type of precision fermentation."
+  answer: 0
+  explain: "Cultivated meat starts from animal cells. By the strict definition, it is not vegan."
+
+- key: "m11:2"
+  module: "Module 11 — Frontier"
+  q: "Why is leghemoglobin important to the Impossible Burger?"
+  opts:
+    - "It binds water."
+    - "It increases protein content."
+    - "It's a natural preservative."
+    - "It binds iron and gives the meaty color, smell, and 'bleed' of cooked beef."
+  answer: 3
+  explain: "Leghemoglobin (a heme protein from soy roots, produced via precision fermentation) is the secret to the burger's meat-like cooking behavior."
+
+- key: "m11:3"
+  module: "Module 11 — Frontier"
+  q: "The biggest unsolved cost driver in cultivated meat today is:"
+  opts:
+    - "The cells themselves."
+    - "Animal-free growth media at sufficient scale and price."
+    - "Packaging."
+    - "Marketing."
+  answer: 1
+  explain: "Replacing fetal bovine serum with affordable, animal-free media — at scale — remains the central cost problem."
+
+- key: "m12:0"
+  module: "Module 12 — Capstone"
+  q: "The single most important rule when prototyping is:"
+  opts:
+    - "Use the most expensive ingredients."
+    - "Match a famous reference exactly."
+    - "Always use a hydrocolloid."
+    - "Change one variable at a time."
+  answer: 3
+  explain: "If you change five things between batches, you can't tell which change made the difference."
+
+- key: "m12:1"
+  module: "Module 12 — Capstone"
+  q: "The product brief exists to:"
+  opts:
+    - "Make every later decision faster and clearer."
+    - "Impress investors."
+    - "Lock you into a fixed plan."
+    - "Comply with regulation."
+  answer: 0
+  explain: "A good brief is a tool, not a contract. Its purpose is to give every later choice a clear yardstick."
+
+- key: "m12:2"
+  module: "Module 12 — Capstone"
+  q: "Which finding from a small descriptive panel is most actionable?"
+  opts:
+    - "A single rave from one taster."
+    - "A single negative comment."
+    - "Convergent agreement across panelists on a particular attribute."
+    - "An average score above 7."
+  answer: 2
+  explain: "Look for signal that multiple panelists saw the same thing — that's a real, actionable insight."

@@ -7,12 +7,19 @@
     <nav class="nav" aria-label="Primary">
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/curriculum/' | relative_url }}">Curriculum</a>
-      <a href="{{ '/labs/' | relative_url }}">Kitchen Labs</a>
+      <a href="{{ '/labs/' | relative_url }}">Labs</a>
+      <a href="{{ '/review/' | relative_url }}">Review</a>
       <a href="{{ '/glossary/' | relative_url }}">Glossary</a>
-      <a href="{{ '/resources/' | relative_url }}">Resources</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
     </nav>
     <div style="display:flex; gap:.4rem; align-items:center;">
+      <button class="search-trigger" data-action="open-search" aria-label="Search the course">
+        <span class="search-trigger__icon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <span>Search…</span>
+        <span class="kbd">⌘K</span>
+      </button>
       <button class="icon-btn" data-action="toggle-theme" aria-label="Toggle dark mode" title="Toggle dark mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>

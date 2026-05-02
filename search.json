@@ -1,0 +1,60 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+  {% comment %}Modules — list each one with its lede + section labels{% endcomment %}
+  {% for m in site.modules %}
+    {
+      "url": "{{ '/modules/' | append: m.num | append: '-' | append: m.slug | append: '/' | relative_url }}",
+      "title": {{ m.title | jsonify }},
+      "summary": {{ m.summary | jsonify }},
+      "kind": "Module {{ m.num }}",
+      "body": {{ m.topics | join: ' ' | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  ,
+  {% comment %}Other primary pages{% endcomment %}
+  {
+    "url": "{{ '/curriculum/' | relative_url }}",
+    "title": "Curriculum",
+    "summary": "The full curriculum overview with progress tracking.",
+    "kind": "Page",
+    "body": "course modules overview progress"
+  },
+  {
+    "url": "{{ '/labs/' | relative_url }}",
+    "title": "Kitchen Labs",
+    "summary": "All eleven hands-on kitchen labs from the curriculum.",
+    "kind": "Page",
+    "body": "tofu seitan tempeh aquafaba mayonnaise gels triangle test sensory"
+  },
+  {
+    "url": "{{ '/glossary/' | relative_url }}",
+    "title": "Glossary",
+    "summary": "Working dictionary of vegan food science terms.",
+    "kind": "Page",
+    "body": "definitions amino acid agar koji umami emulsion hydrocolloid"
+  },
+  {
+    "url": "{{ '/resources/' | relative_url }}",
+    "title": "Resources",
+    "summary": "Books, papers, organizations, and equipment for going deeper.",
+    "kind": "Page",
+    "body": "harold mcgee modernist cuisine sandor katz koji good food institute"
+  },
+  {
+    "url": "{{ '/about/' | relative_url }}",
+    "title": "About",
+    "summary": "About the Plant Lab — what this course is and why.",
+    "kind": "Page",
+    "body": "plant lab open curriculum vegan food science"
+  },
+  {
+    "url": "{{ '/review/' | relative_url }}",
+    "title": "Review",
+    "summary": "Spaced-repetition review of every quiz question across the course.",
+    "kind": "Page",
+    "body": "spaced repetition review quiz questions"
+  }
+]

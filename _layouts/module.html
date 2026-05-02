@@ -20,6 +20,7 @@ layout: default
     </aside>
 
     <article>
+      {% include module-hero.html %}
       <header class="module-header">
         <div class="module-header__crumbs">
           <a href="{{ '/' | relative_url }}">Home</a> ·
@@ -38,6 +39,8 @@ layout: default
       <div class="module-complete">
         <button class="btn btn--primary" data-action="mark-complete" data-module-id="{{ page.module_id }}">Mark module complete</button>
       </div>
+
+      {% include comments.html %}
 
       <nav class="next-prev" aria-label="Module navigation">
         {% if page.prev %}

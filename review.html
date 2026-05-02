@@ -1,0 +1,44 @@
+---
+layout: default
+title: "Review"
+permalink: /review/
+description: "Spaced-repetition review of every quiz question across the Plant Lab curriculum. Your answers are scheduled into a personal review queue saved on this device."
+---
+
+<section class="section">
+  <div class="container prose">
+    <span class="eyebrow" style="color:var(--accent); font-weight:600;">Spaced repetition</span>
+    <h1>Review</h1>
+    <p class="muted">
+      Every quiz question you've answered enters a personal review queue.
+      Get one right, the interval grows. Get one wrong, you'll see it
+      again tomorrow. Your progress lives on this device — no account, no sync.
+    </p>
+
+    <div class="review-stats" role="region" aria-label="Review stats">
+      <div class="review-stat"><span class="review-stat__n" data-stat-due>0</span><span class="review-stat__l">Due now</span></div>
+      <div class="review-stat"><span class="review-stat__n" data-stat-total>0</span><span class="review-stat__l">In queue</span></div>
+      <div class="review-stat"><span class="review-stat__n" data-stat-learned>0</span><span class="review-stat__l">Learned (≥ 7d)</span></div>
+      <div class="review-stat"><span class="review-stat__n">{{ site.data.questions | size }}</span><span class="review-stat__l">Total questions</span></div>
+    </div>
+
+    {% capture qbank %}[
+      {% for q in site.data.questions %}
+        {
+          "key": {{ q.key | jsonify }},
+          "module": {{ q.module | jsonify }},
+          "q": {{ q.q | jsonify }},
+          "opts": {{ q.opts | jsonify }},
+          "answer": {{ q.answer }},
+          "explain": {{ q.explain | jsonify }}
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]{% endcapture %}
+
+    <div data-review-root data-review-questions="{{ qbank | strip_newlines | escape }}">
+      <div class="review-empty">
+        <p>Loading your review session…</p>
+      </div>
+    </div>
+  </div>
+</section>

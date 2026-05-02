@@ -1,0 +1,213 @@
+{% comment %}
+  Custom inline SVG hero illustration per module, selected by page.module_id.
+  Illustrations are decorative — `aria-hidden="true"` — and use currentColor so
+  they tint correctly in dark mode.
+{% endcomment %}
+<div class="module-hero" aria-hidden="true">
+  <span class="module-hero__num">Module {{ page.module_num }}</span>
+
+  {% case page.module_id %}
+  {% when "m01" %}
+    {% comment %}Foundations — water droplet + molecular vertices{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2" fill="none" opacity="0.9">
+        <line x1="100" y1="100" x2="170" y2="60"/><line x1="170" y1="60" x2="240" y2="100"/>
+        <line x1="240" y1="100" x2="310" y2="60"/><line x1="310" y1="60" x2="380" y2="100"/>
+        <line x1="170" y1="60" x2="170" y2="20"/><line x1="310" y1="60" x2="310" y2="20"/>
+        <line x1="100" y1="100" x2="100" y2="150"/><line x1="380" y1="100" x2="380" y2="150"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="100" cy="100" r="8"/><circle cx="170" cy="60" r="8"/>
+        <circle cx="240" cy="100" r="8"/><circle cx="310" cy="60" r="8"/>
+        <circle cx="380" cy="100" r="8"/>
+      </g>
+      <g fill="#c25b3a">
+        <circle cx="170" cy="20" r="6"/><circle cx="310" cy="20" r="6"/>
+        <circle cx="100" cy="150" r="6"/><circle cx="380" cy="150" r="6"/>
+      </g>
+      <path d="M440 70 Q460 100 460 130 Q460 160 440 160 Q420 160 420 130 Q420 100 440 70 Z" fill="currentColor" opacity="0.35"/>
+    </svg>
+
+  {% when "m02" %}
+    {% comment %}Proteins — beaded amino-acid chain folding{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 100 Q90 40 140 100 T240 100 T340 100 T440 100 T490 100" stroke="currentColor" stroke-width="2" fill="none"/>
+      <g fill="currentColor">
+        <circle cx="40" cy="100" r="8"/><circle cx="90" cy="70" r="8"/><circle cx="140" cy="100" r="8"/>
+        <circle cx="190" cy="70" r="8"/><circle cx="240" cy="100" r="8"/><circle cx="290" cy="70" r="8"/>
+        <circle cx="340" cy="100" r="8"/><circle cx="390" cy="70" r="8"/><circle cx="440" cy="100" r="8"/>
+        <circle cx="490" cy="100" r="8"/>
+      </g>
+      <g fill="#c25b3a" opacity="0.85">
+        <circle cx="90" cy="40" r="5"/><circle cx="190" cy="40" r="5"/>
+        <circle cx="290" cy="40" r="5"/><circle cx="390" cy="40" r="5"/>
+      </g>
+    </svg>
+
+  {% when "m03" %}
+    {% comment %}Fats — triglyceride three-tail glyph{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2" fill="none">
+        <line x1="120" y1="60"  x2="450" y2="60"/>
+        <polyline points="120,100 240,100 270,115 380,115 410,100 450,100"/>
+        <polyline points="120,140 200,140 230,155 290,155 320,140 380,140 410,155 450,155"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="120" cy="60" r="8"/><circle cx="120" cy="100" r="8"/><circle cx="120" cy="140" r="8"/>
+      </g>
+      <text x="100" y="64" font-family="Georgia,serif" font-size="11" fill="currentColor" text-anchor="end">G</text>
+      <text x="100" y="104" font-family="Georgia,serif" font-size="11" fill="currentColor" text-anchor="end">G</text>
+      <text x="100" y="144" font-family="Georgia,serif" font-size="11" fill="currentColor" text-anchor="end">G</text>
+    </svg>
+
+  {% when "m04" %}
+    {% comment %}Carbs — branched + linear starch chains{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2" fill="none">
+        <path d="M40 60 L100 60 L130 80 L190 80 L220 60 L280 60 L310 80 L370 80 L400 60 L470 60"/>
+        <path d="M70 140 L130 140 L160 160 L220 160 L250 140 L310 140 L340 160 L400 160 L430 140 L490 140"/>
+        <path d="M150 80 L150 110"/><path d="M250 60 L250 90"/>
+        <path d="M250 90 L290 110"/><path d="M250 90 L210 110"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="40" cy="60" r="6"/><circle cx="190" cy="80" r="6"/><circle cx="280" cy="60" r="6"/>
+        <circle cx="370" cy="80" r="6"/><circle cx="470" cy="60" r="6"/>
+        <circle cx="70" cy="140" r="6"/><circle cx="220" cy="160" r="6"/>
+        <circle cx="310" cy="140" r="6"/><circle cx="400" cy="160" r="6"/>
+        <circle cx="490" cy="140" r="6"/>
+      </g>
+    </svg>
+
+  {% when "m05" %}
+    {% comment %}Fermentation — bubbling jar + microbial dots{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="200" y="40" width="120" height="130" rx="14" stroke="currentColor" stroke-width="2.5" fill="rgba(108, 172, 87, 0.18)"/>
+      <rect x="215" y="30" width="90" height="14" rx="3" fill="currentColor"/>
+      <g fill="currentColor">
+        <circle cx="225" cy="80" r="5"/><circle cx="245" cy="120" r="4"/>
+        <circle cx="270" cy="95" r="6"/><circle cx="290" cy="135" r="4"/>
+        <circle cx="305" cy="105" r="5"/><circle cx="240" cy="155" r="3"/>
+      </g>
+      <g fill="#c25b3a">
+        <circle cx="245" cy="55" r="3"/><circle cx="275" cy="60" r="3"/><circle cx="295" cy="50" r="3"/>
+        <circle cx="260" cy="20" r="2.5"/><circle cx="280" cy="14" r="2.5"/>
+      </g>
+      <g stroke="#c25b3a" stroke-width="2" fill="none" opacity="0.6">
+        <path d="M260 30 Q255 20 260 10"/><path d="M280 20 Q275 12 280 4"/>
+      </g>
+    </svg>
+
+  {% when "m06" %}
+    {% comment %}Texturization — extruder schematic{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="50" y="80" width="280" height="40" stroke="currentColor" stroke-width="2.5" fill="rgba(108, 172, 87, 0.18)" rx="6"/>
+      <path d="M60 100 Q80 80 100 100 T140 100 T180 100 T220 100 T260 100 T310 100" stroke="currentColor" stroke-width="1.6" fill="none"/>
+      <rect x="330" y="86" width="140" height="28" stroke="currentColor" stroke-width="2" fill="rgba(127,127,127,0.06)" rx="4"/>
+      <g stroke="#c25b3a" stroke-width="2.5">
+        <line x1="332" y1="92" x2="468" y2="92"/>
+        <line x1="332" y1="100" x2="468" y2="100"/>
+        <line x1="332" y1="108" x2="468" y2="108"/>
+      </g>
+      <text x="190" y="68" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="rgba(128,128,128,0.85)">heated barrel</text>
+      <text x="400" y="76" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="rgba(128,128,128,0.85)">cooling die</text>
+    </svg>
+
+  {% when "m07" %}
+    {% comment %}Flavor — taste + aroma waves{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2.5" fill="none" opacity="0.85">
+        <path d="M30 100 Q90 30 150 100 T270 100 T390 100 T490 100"/>
+        <path d="M30 120 Q90 60 150 120 T270 120 T390 120 T490 120" opacity="0.55"/>
+        <path d="M30 140 Q90 90 150 140 T270 140 T390 140 T490 140" opacity="0.3"/>
+      </g>
+      <g fill="#c25b3a">
+        <circle cx="90" cy="65" r="6"/><circle cx="210" cy="65" r="6"/>
+        <circle cx="330" cy="65" r="6"/><circle cx="450" cy="65" r="6"/>
+      </g>
+    </svg>
+
+  {% when "m08" %}
+    {% comment %}Eggs/Dairy — split egg + plant droplet{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="160" cy="100" rx="70" ry="80" fill="rgba(108, 172, 87, 0.18)" stroke="currentColor" stroke-width="2"/>
+      <circle cx="160" cy="100" r="32" fill="#c25b3a" opacity="0.6"/>
+      <circle cx="160" cy="100" r="18" fill="#d6a83a"/>
+      <text x="270" y="115" font-family="Georgia,serif" font-style="italic" font-size="36" fill="rgba(128,128,128,0.85)">→</text>
+      <path d="M380 60 Q420 40 420 100 Q420 170 380 170 Q340 170 340 100 Q340 40 380 60 Z" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="370" cy="90" rx="6" ry="14" fill="#fcfbf6" opacity="0.5"/>
+    </svg>
+
+  {% when "m09" %}
+    {% comment %}Nutrition — periodic-style cards{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2" fill="rgba(108, 172, 87, 0.18)">
+        <rect x="60" y="50" width="70" height="90" rx="6"/>
+        <rect x="150" y="50" width="70" height="90" rx="6"/>
+        <rect x="240" y="50" width="70" height="90" rx="6"/>
+        <rect x="330" y="50" width="70" height="90" rx="6"/>
+        <rect x="420" y="50" width="70" height="90" rx="6"/>
+      </g>
+      <g font-family="Georgia,serif" fill="currentColor" text-anchor="middle">
+        <text x="95" y="92" font-size="26" font-weight="600">B₁₂</text>
+        <text x="185" y="92" font-size="26" font-weight="600">Fe</text>
+        <text x="275" y="92" font-size="22" font-weight="600">DHA</text>
+        <text x="365" y="92" font-size="26" font-weight="600">Ca</text>
+        <text x="455" y="92" font-size="26" font-weight="600">D</text>
+      </g>
+    </svg>
+
+  {% when "m10" %}
+    {% comment %}Sustainability — bar chart + leaf{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor">
+        <rect x="60"  y="40"  width="40" height="130" rx="2"/>
+        <rect x="120" y="80"  width="40" height="90"  rx="2" opacity="0.85"/>
+        <rect x="180" y="120" width="40" height="50"  rx="2" opacity="0.7"/>
+        <rect x="240" y="140" width="40" height="30"  rx="2" opacity="0.55"/>
+        <rect x="300" y="155" width="40" height="15"  rx="2" opacity="0.4"/>
+      </g>
+      <path d="M380 130 Q440 60 470 80 Q480 130 420 160 Q400 165 380 130 Z" fill="currentColor" opacity="0.85"/>
+      <line x1="430" y1="160" x2="450" y2="80" stroke="currentColor" stroke-width="2"/>
+    </svg>
+
+  {% when "m11" %}
+    {% comment %}Frontier — bioreactor + DNA helix{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="80" y="40" width="120" height="130" rx="20" stroke="currentColor" stroke-width="2.5" fill="rgba(108, 172, 87, 0.18)"/>
+      <circle cx="140" cy="80" r="3" fill="currentColor"/><circle cx="160" cy="100" r="3" fill="currentColor"/>
+      <circle cx="120" cy="120" r="3" fill="currentColor"/><circle cx="170" cy="140" r="3" fill="currentColor"/>
+      <circle cx="135" cy="155" r="3" fill="currentColor"/>
+      <g stroke="#c25b3a" stroke-width="2" fill="none">
+        <path d="M280 30 Q310 60 280 90 Q310 120 280 150 Q310 180 280 200"/>
+        <path d="M340 30 Q310 60 340 90 Q310 120 340 150 Q310 180 340 200"/>
+        <line x1="290" y1="50" x2="330" y2="50"/><line x1="290" y1="80" x2="330" y2="80"/>
+        <line x1="290" y1="110" x2="330" y2="110"/><line x1="290" y1="140" x2="330" y2="140"/>
+        <line x1="290" y1="170" x2="330" y2="170"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="410" cy="80" r="22"/><circle cx="450" cy="120" r="18"/>
+        <circle cx="395" cy="140" r="14"/>
+      </g>
+    </svg>
+
+  {% when "m12" %}
+    {% comment %}Capstone — package box with sparkle{% endcomment %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="currentColor" stroke-width="2.5" fill="rgba(108, 172, 87, 0.18)">
+        <rect x="170" y="60" width="180" height="120" rx="8"/>
+      </g>
+      <line x1="170" y1="100" x2="350" y2="100" stroke="currentColor" stroke-width="2"/>
+      <text x="260" y="92" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="currentColor" font-weight="600">Capstone</text>
+      <text x="260" y="142" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="rgba(128,128,128,0.85)">design · prototype · story</text>
+      <g fill="#c25b3a">
+        <circle cx="120" cy="60" r="3"/><circle cx="100" cy="100" r="3"/><circle cx="120" cy="140" r="3"/>
+        <circle cx="400" cy="50" r="3"/><circle cx="420" cy="100" r="3"/><circle cx="400" cy="150" r="3"/>
+      </g>
+    </svg>
+
+  {% else %}
+    <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="260" cy="100" r="60" fill="currentColor" opacity="0.4"/>
+    </svg>
+  {% endcase %}
+</div>
