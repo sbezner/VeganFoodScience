@@ -3,18 +3,20 @@ layout: default
 ---
 <div class="container">
   <div class="module-shell">
-    <aside class="sidebar" aria-label="On this page">
-      <h4>On this page</h4>
-      <ul class="toc">
-        {% for s in page.sections %}
-        <li><a href="#{{ s.id }}">{{ s.label }}</a></li>
-        {% endfor %}
-      </ul>
-      <hr>
-      <h4>Module</h4>
-      <p class="muted" style="margin:.2rem 0 .8rem;">{{ page.duration }} · {{ page.level | default: "Intro" }}</p>
-      <button class="btn btn--primary" data-action="mark-complete" data-module-id="{{ page.module_id }}" style="width:100%;">Mark module complete</button>
-      <p style="margin-top:1rem;"><a href="{{ '/curriculum/' | relative_url }}" class="muted">← All modules</a></p>
+    <aside class="sidebar" aria-label="Module navigation">
+      <details class="sidebar__toc" open>
+        <summary><span class="sidebar__toc-label">On this page</span></summary>
+        <ul class="toc">
+          {% for s in page.sections %}
+          <li><a href="#{{ s.id }}">{{ s.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </details>
+      <div class="sidebar__meta">
+        <h4>Module</h4>
+        <p class="muted">{{ page.duration }} · {{ page.level | default: "Intro" }}</p>
+        <p><a href="{{ '/curriculum/' | relative_url }}" class="muted">← All modules</a></p>
+      </div>
     </aside>
 
     <article>
@@ -32,6 +34,10 @@ layout: default
       </header>
 
       {{ content }}
+
+      <div class="module-complete">
+        <button class="btn btn--primary" data-action="mark-complete" data-module-id="{{ page.module_id }}">Mark module complete</button>
+      </div>
 
       <nav class="next-prev" aria-label="Module navigation">
         {% if page.prev %}
