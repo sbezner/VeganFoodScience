@@ -12,6 +12,17 @@ markdown: kramdown
 highlighter: rouge
 permalink: pretty
 
+# Comments — powered by giscus (GitHub Discussions). Flip `enabled` to true
+# once you've installed the giscus app on the repo, enabled Discussions,
+# and pasted the IDs from giscus.app below.
+comments:
+  enabled: false
+  giscus:
+    repo: "sbezner/VeganFoodScience"
+    repo_id: ""           # paste data-repo-id from giscus.app
+    category: "General"
+    category_id: ""       # paste data-category-id from giscus.app
+
 # Course-level metadata used by templates
 course:
   duration_weeks: 12

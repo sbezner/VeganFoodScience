@@ -1,13 +1,14 @@
+{% if site.comments.enabled %}
 <section class="comments" aria-label="Comments">
   <div class="comments__head">
     <h2>Discussion</h2>
     <p class="muted">Questions, corrections, or your own results from the lab? Drop them here. Comments are powered by GitHub Discussions via <a href="https://giscus.app" target="_blank" rel="noopener">giscus</a>; you'll need a free GitHub account.</p>
   </div>
   <script src="https://giscus.app/client.js"
-          data-repo="sbezner/VeganFoodScience"
-          data-repo-id="REPLACE_WITH_REPO_ID"
-          data-category="General"
-          data-category-id="REPLACE_WITH_CATEGORY_ID"
+          data-repo="{{ site.comments.giscus.repo }}"
+          data-repo-id="{{ site.comments.giscus.repo_id }}"
+          data-category="{{ site.comments.giscus.category }}"
+          data-category-id="{{ site.comments.giscus.category_id }}"
           data-mapping="pathname"
           data-strict="0"
           data-reactions-enabled="1"
@@ -19,3 +20,4 @@
           crossorigin="anonymous"
           async></script>
 </section>
+{% endif %}
