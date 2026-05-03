@@ -578,7 +578,7 @@ tbody tr:hover { background: color-mix(in srgb, var(--accent-soft) 50%, transpar
 .search-trigger:hover { background: var(--surface); color: var(--text); }
 .search-trigger .kbd { margin-left: auto; }
 @media (max-width: 800px) {
-  .search-trigger { min-width: 0; padding: 0; width: 38px; height: 38px; justify-content: center; }
+  .search-trigger { min-width: 0; padding: 0; width: 44px; height: 44px; justify-content: center; }
   .search-trigger span:not(.search-trigger__icon), .search-trigger .kbd { display: none; }
 }
 

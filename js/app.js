@@ -307,6 +307,25 @@
     if (_wakeLock) { try { _wakeLock.release(); } catch {} _wakeLock = null; }
   }
 
+  function playTimerChime() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+      [880, 1318, 880].forEach((freq, i) => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine"; o.frequency.value = freq;
+        const t = now + i * 0.18;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.18, t + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+        o.connect(g).connect(ctx.destination);
+        o.start(t); o.stop(t + 0.18);
+      });
+      setTimeout(() => ctx.close(), 1500);
+    } catch (e) { /* audio context blocked — vibration still fires */ }
+  }
+
   function openKitchenMode(labEl, key, title) {
     const overlay = buildKitchenOverlay(labEl, key, title);
     document.body.appendChild(overlay);
@@ -425,8 +444,12 @@
       if (remaining <= 0) {
         remaining = 0; running = false;
         display.textContent = "00:00";
-        try { new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=").play(); } catch {}
+        playTimerChime();
         if ("vibrate" in navigator) navigator.vibrate([200, 100, 200, 100, 400]);
+        widget.animate(
+          [{ transform: "translateX(-50%) scale(1)" }, { transform: "translateX(-50%) scale(1.08)" }, { transform: "translateX(-50%) scale(1)" }],
+          { duration: 400, iterations: 3 }
+        );
         startBtn.textContent = "Start";
         return;
       }
