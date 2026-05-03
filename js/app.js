@@ -945,6 +945,12 @@
 
   // ---------- COMPLETION CERTIFICATE ----------
   function initCertificate() {
+    // ?cert=preview anywhere on the site opens the certificate modal — for sharing.
+    // Doesn't touch the vfs.cert.seen flag so the real moment still happens organically.
+    if (new URLSearchParams(location.search).get("cert") === "preview") {
+      requestAnimationFrame(launchCertificate);
+    }
+
     // Trigger when the user marks the 12th module complete
     document.querySelectorAll("[data-action='mark-complete']").forEach(btn => {
       btn.addEventListener("click", () => {
