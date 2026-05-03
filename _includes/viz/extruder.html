@@ -1,0 +1,181 @@
+<figure class="viz" data-viz="extruder">
+  <div class="viz__head">
+    <span class="viz__tag">Interactive</span>
+    <h3 class="viz__title">Inside the cooling die</h3>
+    <p class="viz__sub">High-moisture extrusion (HMMA) gets its meat-like grain because protein flows through a long cooling die at a controlled rate. Adjust the variables and watch the fibers align — or fail to.</p>
+  </div>
+
+  <div class="viz__body">
+    <canvas class="viz-extruder__canvas" width="640" height="240" aria-label="Extruder cooling die simulation"></canvas>
+
+    <div class="viz-extruder__controls">
+      <label>Flow rate <span class="viz-extruder__val" data-out="flow">moderate</span>
+        <input type="range" class="viz-extruder__flow" min="10" max="100" step="5" value="55">
+      </label>
+      <label>Cooling gradient <span class="viz-extruder__val" data-out="cool">steady</span>
+        <input type="range" class="viz-extruder__cool" min="10" max="100" step="5" value="65">
+      </label>
+      <label>Moisture (%) <span class="viz-extruder__val" data-out="moist">60%</span>
+        <input type="range" class="viz-extruder__moist" min="25" max="80" step="5" value="60">
+      </label>
+    </div>
+
+    <div class="viz-extruder__readout">
+      <div class="viz-extruder__label">Result:</div>
+      <div class="viz-extruder__status">Aligned fibers — a clean HMMA fillet.</div>
+    </div>
+  </div>
+  <figcaption class="viz__caption">Low-moisture extrusion (≈ 25–30%) puffs into TVP. High moisture (≈ 60%) plus a long, gentle cooling profile aligns the protein into the fibrous, anisotropic structure that defines a plant-meat fillet.</figcaption>
+</figure>
+
+<script>
+(() => {
+  const root = document.querySelector('.viz[data-viz="extruder"]'); if (!root) return;
+  const canvas = root.querySelector('.viz-extruder__canvas');
+  const ctx = canvas.getContext('2d');
+  const flowIn = root.querySelector('.viz-extruder__flow');
+  const coolIn = root.querySelector('.viz-extruder__cool');
+  const moistIn = root.querySelector('.viz-extruder__moist');
+  const flowOut = root.querySelector('[data-out="flow"]');
+  const coolOut = root.querySelector('[data-out="cool"]');
+  const moistOut = root.querySelector('[data-out="moist"]');
+  const statusEl = root.querySelector('.viz-extruder__status');
+
+  let particles = [];
+  let raf;
+
+  const status = () => {
+    const flow = parseInt(flowIn.value, 10);
+    const cool = parseInt(coolIn.value, 10);
+    const moist = parseInt(moistIn.value, 10);
+    if (moist < 35) return ['tvp', 'Low moisture — this would puff into TVP at the die exit, not align into a fillet.'];
+    if (flow > 85) return ['turbulent', 'Flow too fast — turbulent, no chance for fibers to organize.'];
+    if (cool < 30) return ['undercooled', 'Cooling too steep — protein sets before it aligns. Brittle, flaky.'];
+    if (cool > 85 && flow < 30) return ['overcooked', 'Slow flow + gradual cooling — over-set, dry, chalky.'];
+    if (moist >= 55 && flow >= 30 && flow <= 75 && cool >= 40 && cool <= 80) return ['ideal', 'Aligned fibers — a clean HMMA fillet.'];
+    return ['marginal', 'Marginal alignment — texture would be patchy.'];
+  };
+
+  const seed = () => {
+    const w = canvas.width, h = canvas.height;
+    particles = Array.from({ length: 320 }, () => ({
+      x: Math.random() * 80,
+      y: 50 + Math.random() * (h - 100),
+      vx: 0,
+      vy: 0,
+      a: Math.random() * Math.PI * 2,  // angle
+      l: 18 + Math.random() * 8,        // length (fiber segment)
+      seed: Math.random()
+    }));
+  };
+
+  const draw = () => {
+    const w = canvas.width, h = canvas.height;
+    const flow = parseInt(flowIn.value, 10);
+    const cool = parseInt(coolIn.value, 10);
+    const moist = parseInt(moistIn.value, 10);
+    const [state] = status();
+
+    // Background — die schematic
+    ctx.fillStyle = '#fdfaf3';
+    ctx.fillRect(0, 0, w, h);
+    // Heated barrel (left third)
+    ctx.fillStyle = 'rgba(194, 91, 58, 0.16)';
+    ctx.fillRect(0, 30, w * 0.32, h - 60);
+    // Cooling die (right two-thirds)
+    const grad = ctx.createLinearGradient(w * 0.32, 0, w, 0);
+    grad.addColorStop(0, 'rgba(194, 91, 58, 0.16)');
+    grad.addColorStop(1, 'rgba(108, 172, 87, 0.18)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(w * 0.32, 30, w * 0.68, h - 60);
+
+    // Walls
+    ctx.strokeStyle = '#36732a';
+    ctx.lineWidth = 2.5;
+    ctx.strokeRect(2, 30, w - 4, h - 60);
+    // Die separator
+    ctx.beginPath(); ctx.moveTo(w * 0.32, 30); ctx.lineTo(w * 0.32, h - 30); ctx.stroke();
+
+    // Labels
+    ctx.fillStyle = 'rgba(60,60,60,0.7)'; ctx.font = '11px Inter, sans-serif';
+    ctx.fillText('heated barrel', 20, 22);
+    ctx.fillText('long cooling die', w * 0.34 + 10, 22);
+
+    // Move particles
+    const speed = (flow / 100) * 3 + 0.3;
+    const turbulence = (state === 'turbulent') ? 0.8 : (1 - moist / 120) * 0.4;
+
+    particles.forEach(p => {
+      // Target angle drifts toward 0 (aligned with flow) as we go through the cooling die.
+      // Cooling gradient determines how quickly orientation locks in.
+      const dieX = (p.x - w * 0.32) / (w - w * 0.32);
+      let targetAngle = 0;
+      if (state === 'tvp')        targetAngle = Math.sin(p.seed * 6 + p.x * 0.05) * 0.9;
+      else if (state === 'turbulent') targetAngle = Math.sin(p.x * 0.04 + p.seed * 6) * 1.0;
+      else if (state === 'undercooled') targetAngle = (p.seed - 0.5) * 1.2;
+      else if (state === 'ideal') targetAngle = (p.seed - 0.5) * Math.max(0, 0.45 - dieX * 0.4);
+      else if (state === 'marginal') targetAngle = (p.seed - 0.5) * (0.7 - dieX * 0.3);
+      else targetAngle = (p.seed - 0.5) * 0.4;
+
+      const k = (cool / 100) * 0.06 + 0.01;
+      p.a += (targetAngle - p.a) * k;
+      p.x += speed;
+      p.y += Math.sin(p.x * 0.03 + p.seed * 8) * turbulence * (state === 'tvp' ? 0.4 : 0.2);
+      if (p.x > w - 10) { p.x = -10; p.y = 50 + Math.random() * (h - 100); p.a = Math.random() * Math.PI * 2; }
+    });
+
+    // Draw fibers
+    particles.forEach(p => {
+      const dx = Math.cos(p.a) * p.l / 2;
+      const dy = Math.sin(p.a) * p.l / 2;
+      const dieX = Math.max(0, Math.min(1, (p.x - w * 0.32) / (w - w * 0.32)));
+      // Color: hot terra in barrel → cooler green in die
+      const r = Math.round(194 - dieX * 90);
+      const g = Math.round(91 + dieX * 80);
+      const b = Math.round(58 + dieX * 40);
+      ctx.strokeStyle = `rgba(${r},${g},${b}, 0.85)`;
+      ctx.lineWidth = 2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(p.x - dx, p.y - dy);
+      ctx.lineTo(p.x + dx, p.y + dy);
+      ctx.stroke();
+    });
+
+    // TVP puff visualization at exit (low moisture only)
+    if (state === 'tvp') {
+      ctx.fillStyle = 'rgba(180,140,90,0.35)';
+      for (let i = 0; i < 20; i++) {
+        const yy = 50 + i * 8;
+        ctx.beginPath();
+        ctx.arc(w - 30, yy, 12 + (i % 3) * 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  };
+
+  const tick = () => { draw(); raf = requestAnimationFrame(tick); };
+
+  const update = () => {
+    flowOut.textContent = flowIn.value < 30 ? 'slow' : flowIn.value < 60 ? 'moderate' : flowIn.value < 85 ? 'high' : 'turbulent';
+    coolOut.textContent = coolIn.value < 30 ? 'steep' : coolIn.value < 60 ? 'steady' : coolIn.value < 85 ? 'gradual' : 'very gradual';
+    moistOut.textContent = `${moistIn.value}%`;
+    const [state, msg] = status();
+    statusEl.textContent = msg;
+    statusEl.dataset.state = state;
+  };
+  ['change', 'input'].forEach(ev => {
+    flowIn.addEventListener(ev, update);
+    coolIn.addEventListener(ev, update);
+    moistIn.addEventListener(ev, update);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { seed(); tick(); }
+      else cancelAnimationFrame(raf);
+    });
+  }, { threshold: 0.1 });
+  obs.observe(root);
+  update();
+})();
+</script>

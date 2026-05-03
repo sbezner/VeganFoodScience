@@ -1,0 +1,127 @@
+<figure class="viz" data-viz="maillard" aria-labelledby="viz-maillard-cap">
+  <div class="viz__head">
+    <span class="viz__tag">Interactive</span>
+    <h3 class="viz__title">The Maillard reaction at temperature</h3>
+    <p class="viz__sub">Drag the slider. Watch which families of aroma compounds appear as the surface gets hotter — and why a 100 °C simmer can never produce that crusty, roasted flavor.</p>
+  </div>
+
+  <div class="viz__body">
+    <div class="viz-maillard__pan" aria-hidden="true">
+      <canvas class="viz-maillard__canvas" width="640" height="200"></canvas>
+      <div class="viz-maillard__readout">
+        <span class="viz-maillard__temp">100°</span>
+        <span class="viz-maillard__phase">Simmering — water-bound, no Maillard</span>
+      </div>
+    </div>
+
+    <label class="viz-maillard__label">Surface temperature
+      <input type="range" class="viz-maillard__slider" min="60" max="220" step="2" value="100" aria-label="Surface temperature in degrees Celsius">
+    </label>
+
+    <ul class="viz-maillard__compounds" role="list">
+      <li data-compound="amadori" data-on="100"><span class="dot" style="--c:#7baf6a"></span><span class="name">Amadori products</span><small>colorless, building blocks</small></li>
+      <li data-compound="furanones" data-on="140"><span class="dot" style="--c:#d6a83a"></span><span class="name">Furanones</span><small>caramel, sweet</small></li>
+      <li data-compound="pyrazines" data-on="160"><span class="dot" style="--c:#c25b3a"></span><span class="name">Pyrazines</span><small>roasted, nutty, popcorn</small></li>
+      <li data-compound="thiophenes" data-on="170"><span class="dot" style="--c:#8c3a5e"></span><span class="name">Thiophenes &amp; thiols</span><small>meaty, sulfurous</small></li>
+      <li data-compound="melanoidins" data-on="180"><span class="dot" style="--c:#4a2a18"></span><span class="name">Melanoidins</span><small>brown color, body</small></li>
+      <li data-compound="acrylamide" data-on="200"><span class="dot" style="--c:#444"></span><span class="name">Acrylamide</span><small>burned, undesirable</small></li>
+    </ul>
+  </div>
+  <figcaption id="viz-maillard__cap" class="viz__caption">A simplified model. Real food chemistry is concentration-dependent and time-dependent — but the temperature thresholds and the order of appearance are real.</figcaption>
+</figure>
+
+<script>
+(() => {
+  const root = document.querySelector('.viz[data-viz="maillard"]'); if (!root) return;
+  const canvas = root.querySelector('.viz-maillard__canvas');
+  const ctx = canvas.getContext('2d');
+  const slider = root.querySelector('.viz-maillard__slider');
+  const tempEl = root.querySelector('.viz-maillard__temp');
+  const phaseEl = root.querySelector('.viz-maillard__phase');
+  const compounds = [...root.querySelectorAll('.viz-maillard__compounds li')];
+
+  const phaseFor = (t) => {
+    if (t < 100) return ['Below boiling — moisture intact', 0];
+    if (t < 140) return ['Simmering — water-bound, no Maillard', 0];
+    if (t < 160) return ['Maillard begins — first sweet aromatics', 0.25];
+    if (t < 180) return ['Browning accelerates — roasted, nutty', 0.55];
+    if (t < 200) return ['Deep brown crust — full flavor', 0.85];
+    return ['Too hot — bitter, acrid notes form', 1];
+  };
+
+  const draw = (t) => {
+    const w = canvas.width, h = canvas.height;
+    // background pan
+    ctx.clearRect(0, 0, w, h);
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    const [, intensity] = phaseFor(t);
+    // Surface color shifts from pale to deep brown as temp rises
+    const r = Math.round(245 - intensity * 200);
+    const g = Math.round(232 - intensity * 190);
+    const b = Math.round(200 - intensity * 175);
+    grad.addColorStop(0, `rgb(${r},${g},${b})`);
+    grad.addColorStop(1, `rgb(${Math.max(40,r-30)},${Math.max(30,g-30)},${Math.max(20,b-30)})`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Steam wisps if t > 100
+    if (t > 100) {
+      const steam = Math.min(1, (t - 100) / 80);
+      ctx.fillStyle = `rgba(255,255,255,${0.05 + steam * 0.18})`;
+      for (let i = 0; i < 8; i++) {
+        const x = (Date.now() / 50 + i * 80) % (w + 100) - 50;
+        ctx.beginPath();
+        ctx.ellipse(x, 30 + (i % 3) * 20, 50, 14, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Char specks for high temps
+    if (t >= 200) {
+      ctx.fillStyle = '#222';
+      for (let i = 0; i < 25; i++) {
+        ctx.fillRect((i * 37) % w, h - 30 + (i * 11) % 25, 2, 2);
+      }
+    }
+
+    // Bubbles when boiling-only (water-bound)
+    if (t >= 95 && t < 130) {
+      ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+      ctx.lineWidth = 1.5;
+      for (let i = 0; i < 6; i++) {
+        const x = (Date.now() / 30 + i * 110) % w;
+        const y = h - 40 - ((Date.now() / 20 + i * 50) % 80);
+        ctx.beginPath();
+        ctx.arc(x, y, 5 + (i % 3) * 2, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+  };
+
+  const update = () => {
+    const t = parseInt(slider.value, 10);
+    tempEl.textContent = `${t}°`;
+    const [phase] = phaseFor(t);
+    phaseEl.textContent = phase;
+    compounds.forEach(li => {
+      const threshold = parseInt(li.dataset.on, 10);
+      const active = t >= threshold;
+      li.classList.toggle('on', active);
+    });
+    draw(t);
+  };
+
+  slider.addEventListener('input', update);
+  let raf;
+  const loop = () => { draw(parseInt(slider.value, 10)); raf = requestAnimationFrame(loop); };
+  // Animate steam and bubbles when on screen
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) loop();
+      else cancelAnimationFrame(raf);
+    });
+  }, { threshold: 0.1 });
+  obs.observe(root);
+  update();
+})();
+</script>

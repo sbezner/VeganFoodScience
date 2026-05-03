@@ -1,0 +1,173 @@
+<figure class="viz" data-viz="emulsion">
+  <div class="viz__head">
+    <span class="viz__tag">Interactive</span>
+    <h3 class="viz__title">Emulsion explorer</h3>
+    <p class="viz__sub">Adjust droplet size and emulsifier coverage. Watch how a vinaigrette goes from a clear two-phase split to an opaque, stable mayonnaise — and breaks again when the emulsifier runs out.</p>
+  </div>
+
+  <div class="viz__body">
+    <canvas class="viz-emulsion__canvas" width="640" height="320" aria-label="Emulsion simulation"></canvas>
+
+    <div class="viz-emulsion__controls">
+      <label>Droplet size <span class="viz-emulsion__val" data-out="size">medium</span>
+        <input type="range" class="viz-emulsion__size" min="3" max="40" step="1" value="14" aria-label="Droplet size">
+      </label>
+      <label>Emulsifier <span class="viz-emulsion__val" data-out="emul">75%</span>
+        <input type="range" class="viz-emulsion__emul" min="0" max="100" step="5" value="75" aria-label="Emulsifier coverage">
+      </label>
+      <label>Shear (whisking) <span class="viz-emulsion__val" data-out="shear">medium</span>
+        <input type="range" class="viz-emulsion__shear" min="0" max="100" step="5" value="60" aria-label="Shear / whisking energy">
+      </label>
+    </div>
+
+    <div class="viz-emulsion__readout">
+      <div class="viz-emulsion__label">Status:</div>
+      <div class="viz-emulsion__status">Stable emulsion — like vegan mayonnaise.</div>
+    </div>
+  </div>
+  <figcaption class="viz__caption">Smaller droplets + sufficient emulsifier + adequate shear → stable, opaque emulsion. Run out of emulsifier and the droplets coalesce — your vinaigrette breaks.</figcaption>
+</figure>
+
+<script>
+(() => {
+  const root = document.querySelector('.viz[data-viz="emulsion"]'); if (!root) return;
+  const canvas = root.querySelector('.viz-emulsion__canvas');
+  const ctx = canvas.getContext('2d');
+  const sizeIn = root.querySelector('.viz-emulsion__size');
+  const emulIn = root.querySelector('.viz-emulsion__emul');
+  const shearIn = root.querySelector('.viz-emulsion__shear');
+  const sizeOut = root.querySelector('[data-out="size"]');
+  const emulOut = root.querySelector('[data-out="emul"]');
+  const shearOut = root.querySelector('[data-out="shear"]');
+  const statusEl = root.querySelector('.viz-emulsion__status');
+
+  let droplets = [];
+  let raf;
+
+  const generate = () => {
+    const size = parseInt(sizeIn.value, 10);
+    const w = canvas.width, h = canvas.height;
+    // Number of droplets is inversely proportional to size² (constant volume)
+    const n = Math.max(8, Math.round(2200 / size));
+    droplets = Array.from({ length: n }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h * 0.85 + h * 0.05,
+      r: size + (Math.random() - 0.5) * size * 0.4,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+    }));
+  };
+
+  const status = () => {
+    const size = parseInt(sizeIn.value, 10);
+    const emul = parseInt(emulIn.value, 10);
+    const shear = parseInt(shearIn.value, 10);
+
+    if (shear < 20) return ['split', 'No mixing — oil floats on water as separate phases.'];
+    if (emul < 25) return ['breaking', 'Too little emulsifier — droplets are coalescing. Watch them merge.'];
+    if (size > 28 && emul < 60) return ['unstable', 'Large droplets, modest emulsifier — turbid but will separate within minutes.'];
+    if (size <= 12 && emul >= 70) return ['stable', 'Small droplets + plenty of emulsifier — stable, creamy emulsion.'];
+    if (size <= 18 && emul >= 50) return ['stable-light', 'A working vinaigrette — creamy in the moment, will need a re-shake later.'];
+    return ['unstable', 'Marginal — somewhere between dressing and broken sauce.'];
+  };
+
+  const draw = () => {
+    const size = parseInt(sizeIn.value, 10);
+    const emul = parseInt(emulIn.value, 10);
+    const shear = parseInt(shearIn.value, 10);
+    const [state] = status();
+    const w = canvas.width, h = canvas.height;
+
+    // Background — opacity rises with droplet count + emulsifier, indicating a milky, stable mix
+    const opacity = Math.min(1, (1 - size / 50) * (emul / 100) * 0.9 + 0.1);
+    ctx.fillStyle = `rgb(${Math.round(245 - opacity * 30)}, ${Math.round(238 - opacity * 25)}, ${Math.round(220 - opacity * 25)})`;
+    ctx.fillRect(0, 0, w, h);
+
+    // Two-phase split: render as two horizontal layers when shear is too low
+    if (state === 'split') {
+      const splitY = h * 0.45;
+      ctx.fillStyle = '#d6a83a';
+      ctx.fillRect(0, 0, w, splitY);
+      ctx.fillStyle = '#e2efdc';
+      ctx.fillRect(0, splitY, w, h - splitY);
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0, splitY - 1, w, 2);
+      // labels
+      ctx.fillStyle = 'rgba(60,40,20,0.6)';
+      ctx.font = '13px Inter, sans-serif';
+      ctx.fillText('oil layer', 14, 26);
+      ctx.fillStyle = 'rgba(60,80,60,0.6)';
+      ctx.fillText('water layer', 14, splitY + 24);
+      return;
+    }
+
+    // Move droplets gently; shear shakes them more
+    const drift = 0.2 + shear / 200;
+    droplets.forEach(d => {
+      d.x += d.vx * drift;
+      d.y += d.vy * drift;
+      if (d.x < d.r) { d.x = d.r; d.vx *= -1; }
+      if (d.x > w - d.r) { d.x = w - d.r; d.vx *= -1; }
+      if (d.y < d.r) { d.y = d.r; d.vy *= -1; }
+      if (d.y > h - d.r) { d.y = h - d.r; d.vy *= -1; }
+    });
+
+    // Coalesce if emulsifier insufficient — neighbors merge
+    if (state === 'breaking' && Math.random() < 0.04) {
+      for (let i = 0; i < droplets.length - 1; i++) {
+        const a = droplets[i];
+        for (let j = i + 1; j < droplets.length; j++) {
+          const b = droplets[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          if (Math.sqrt(dx * dx + dy * dy) < a.r + b.r - 2) {
+            a.r = Math.sqrt(a.r * a.r + b.r * b.r);
+            droplets.splice(j, 1);
+            break;
+          }
+        }
+      }
+    }
+
+    // Draw droplets — color is golden oil
+    droplets.forEach(d => {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+      ctx.fillStyle = '#d6a83a';
+      ctx.globalAlpha = 0.85;
+      ctx.fill();
+      // Emulsifier ring
+      if (emul > 10) {
+        ctx.globalAlpha = Math.min(1, emul / 100);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#36732a';
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    });
+  };
+
+  const tick = () => { draw(); raf = requestAnimationFrame(tick); };
+
+  const update = () => {
+    const size = parseInt(sizeIn.value, 10);
+    sizeOut.textContent = size <= 8 ? 'tiny' : size <= 16 ? 'small' : size <= 26 ? 'medium' : 'large';
+    emulOut.textContent = `${emulIn.value}%`;
+    const sh = parseInt(shearIn.value, 10);
+    shearOut.textContent = sh < 20 ? 'none' : sh < 50 ? 'low' : sh < 80 ? 'medium' : 'vigorous';
+    const [state, msg] = status();
+    statusEl.textContent = msg;
+    statusEl.dataset.state = state;
+    generate();
+  };
+  ['change', 'input'].forEach(ev => {
+    sizeIn.addEventListener(ev, update);
+    emulIn.addEventListener(ev, update);
+    shearIn.addEventListener(ev, update);
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) tick(); else cancelAnimationFrame(raf); });
+  }, { threshold: 0.1 });
+  obs.observe(root);
+  update();
+})();
+</script>

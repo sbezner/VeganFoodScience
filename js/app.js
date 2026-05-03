@@ -102,6 +102,9 @@
     initKitchenModeForLabs();
     initSiteSearch();
     initReviewPage();
+    initTodayPanel();
+    initSensoryJournal();
+    initCertificate();
   });
 
   // ---------- theme + nav ----------
@@ -136,6 +139,8 @@
     const label = document.querySelector("[data-progress-label]");
     if (fill) fill.style.width = `${Math.round((done / total) * 100)}%`;
     if (label) label.textContent = `${done} of ${total} modules complete`;
+    const certBtn = document.querySelector("[data-action='open-certificate']");
+    if (certBtn) certBtn.hidden = done < total;
   }
   function bindCompleteButtons() {
     document.querySelectorAll("[data-action='mark-complete']").forEach(btn => {
@@ -660,5 +665,452 @@
       skip.addEventListener("click", () => { i++; next(); });
     };
     next();
+  }
+
+  // ---------- TODAY PANEL ----------
+  const FACTS = [
+    "Koji's enzymes — proteases, amylases, lipases — are the engine behind soy sauce, miso, and sake.",
+    "Aquafaba's foaming power comes from saponins and small soluble proteins parking at the air–water interface.",
+    "Maillard browning needs ≈140 °C; boiling water caps the surface at 100 °C — so wet pans don't brown.",
+    "Methylcellulose gels when heated and melts when cooled — backwards from most hydrocolloids. It's the magic in plant burgers.",
+    "Algae are the original source of long-chain omega-3s. Fish are the middlemen.",
+    "Soy stores its proteins so densely that even a 7% solution can be turned into tofu.",
+    "Glutamate plus a 5'-ribonucleotide produces an umami response 8–15× stronger than either alone.",
+    "Calcium ions cross-link alginate chains via the 'egg-box' model — the secret behind spherification.",
+    "Coconut oil is solid because of lauric acid, a saturated fatty acid whose chains pack tightly.",
+    "Cultured cashew cheese works for the same reason dairy cheese does: lactic acid bacteria drop the pH to the proteins' isoelectric point.",
+    "A plant-based shift could free roughly 3.1 billion hectares of farmland — an area about the size of Africa.",
+    "Mycelium grows naturally fibrous — no extruder needed. That's why Quorn and Meati can make whole cuts.",
+    "Phytic acid in legumes is reduced by 50–90% via sourdough fermentation — the chemistry behind ancient wisdom.",
+    "Kala namak's 'eggy' flavor comes from natural hydrogen sulfide — the same volatile compound in cooked yolks.",
+    "Aspergillus oryzae was officially named Japan's national microbe in 2006."
+  ];
+
+  function initTodayPanel() {
+    const panel = document.querySelector("[data-today]");
+    const hero = document.querySelector("[data-hero]");
+    if (!panel || !hero) return;
+    const dismissed = localStorage.getItem("vfs.today.dismissed") === "true";
+    const progress = Progress.all();
+    const hasProgress = Object.keys(progress).length > 0;
+    if (dismissed || !hasProgress) return;
+
+    fetch(document.documentElement.dataset.searchIndex || "/search.json")
+      .then(r => r.json())
+      .then(items => {
+        const modules = items.filter(it => it.kind && it.kind.startsWith("Module ")).sort((a, b) => a.kind.localeCompare(b.kind));
+        // Map module URL → id (m01, m02, ...) by index
+        const byId = {};
+        modules.forEach((m, i) => { byId[`m${String(i + 1).padStart(2, "0")}`] = m; });
+
+        const doneCount = Object.values(progress).filter(v => v.done).length;
+        // Next module to resume — first one not done
+        let next = modules.find((m, i) => !progress[`m${String(i + 1).padStart(2, "0")}`]?.done);
+        if (!next) next = modules[modules.length - 1]; // all done — point at capstone
+
+        const titleEl = panel.querySelector("[data-today-title]");
+        if (titleEl) {
+          titleEl.textContent = doneCount === 0
+            ? "You started — let's keep going."
+            : doneCount >= 12
+              ? "You finished the course. 🌿"
+              : `${doneCount} of 12 modules done. Keep the streak.`;
+        }
+
+        const resume = panel.querySelector("[data-today-resume]");
+        if (resume) {
+          resume.href = next.url;
+          panel.querySelector("[data-today-resume-title]").textContent = next.title;
+        }
+
+        const stats = SR.stats();
+        const reviewTitle = panel.querySelector("[data-today-review-title]");
+        if (reviewTitle) {
+          reviewTitle.textContent = stats.due === 0
+            ? (stats.total === 0 ? "No questions in queue yet" : "Caught up — no reviews due")
+            : `${stats.due} question${stats.due === 1 ? "" : "s"} due today`;
+        }
+
+        const factEl = panel.querySelector("[data-today-fact]");
+        if (factEl) {
+          const dayIdx = Math.floor(Date.now() / (1000 * 60 * 60 * 24)) % FACTS.length;
+          factEl.textContent = FACTS[dayIdx];
+        }
+
+        hero.hidden = true;
+        panel.hidden = false;
+      })
+      .catch(() => { /* If index fails, fall back to default hero — silent */ });
+
+    panel.querySelector("[data-today-dismiss]")?.addEventListener("click", () => {
+      localStorage.setItem("vfs.today.dismissed", "true");
+      panel.hidden = true;
+      hero.hidden = false;
+    });
+  }
+
+  // ---------- SENSORY JOURNAL ----------
+  const JOURNAL_DB = "vfs.journal.v1";
+  const JOURNAL_STORE = "entries";
+
+  function openJournalDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(JOURNAL_DB, 1);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(JOURNAL_STORE)) {
+          const store = db.createObjectStore(JOURNAL_STORE, { keyPath: "id", autoIncrement: true });
+          store.createIndex("by_lab", "labKey", { unique: false });
+          store.createIndex("by_date", "date", { unique: false });
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function journalAdd(entry) {
+    const db = await openJournalDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(JOURNAL_STORE, "readwrite");
+      tx.objectStore(JOURNAL_STORE).add(entry).onsuccess = (e) => resolve(e.target.result);
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function journalAll() {
+    const db = await openJournalDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(JOURNAL_STORE, "readonly");
+      const req = tx.objectStore(JOURNAL_STORE).getAll();
+      req.onsuccess = () => resolve(req.result.sort((a, b) => b.date - a.date));
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function journalDelete(id) {
+    const db = await openJournalDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(JOURNAL_STORE, "readwrite");
+      tx.objectStore(JOURNAL_STORE).delete(id).onsuccess = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  function initSensoryJournal() {
+    // Inject "Log this batch" button into every lab on module pages
+    document.querySelectorAll(".lab").forEach((lab) => {
+      const moduleId = document.querySelector("[data-module-id]")?.dataset.moduleId || "lab";
+      const labTitle = lab.querySelector(".lab__head h3")?.textContent.trim() || "Kitchen Lab";
+      const head = lab.querySelector(".lab__head");
+      if (!head) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "lab__journal-btn";
+      btn.innerHTML = '<span aria-hidden="true">📓</span> Log this batch';
+      head.appendChild(btn);
+      btn.addEventListener("click", () => openJournalModal({ labKey: `${moduleId}:${labTitle}`, labTitle }));
+    });
+    // Render the /journal/ page if we're on it
+    renderJournalPage();
+  }
+
+  function openJournalModal(ctx) {
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay open";
+    overlay.innerHTML = `
+      <div class="modal" role="dialog" aria-label="Log a batch">
+        <header class="modal__head">
+          <h3>Log this batch</h3>
+          <button class="modal__close" aria-label="Close">✕</button>
+        </header>
+        <div class="modal__body">
+          <p class="muted" style="margin-top:0;">${ctx.labTitle}</p>
+          <label class="field">
+            <span>Photo (optional)</span>
+            <input type="file" accept="image/*" data-j="photo">
+          </label>
+          <div class="ratings">
+            ${["Texture","Aroma","Body","Balance","Finish"].map(a => `
+              <label class="rating">
+                <span>${a}</span>
+                <input type="range" min="1" max="9" value="5" data-j-rating="${a.toLowerCase()}">
+                <output>5</output>
+              </label>`).join("")}
+          </div>
+          <label class="field">
+            <span>Notes</span>
+            <textarea rows="4" data-j="notes" placeholder="What worked, what didn't, what you'd change next time…"></textarea>
+          </label>
+        </div>
+        <footer class="modal__foot">
+          <button class="btn btn--ghost" data-j-cancel>Cancel</button>
+          <button class="btn btn--primary" data-j-save>Save batch</button>
+        </footer>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    const close = () => { overlay.remove(); document.body.style.overflow = ""; };
+    overlay.querySelector(".modal__close").addEventListener("click", close);
+    overlay.querySelector("[data-j-cancel]").addEventListener("click", close);
+    overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
+
+    overlay.querySelectorAll(".rating input").forEach(input => {
+      const out = input.nextElementSibling;
+      input.addEventListener("input", () => out.value = input.value);
+    });
+
+    overlay.querySelector("[data-j-save]").addEventListener("click", async () => {
+      const photoInput = overlay.querySelector("[data-j='photo']");
+      const file = photoInput.files[0];
+      const ratings = {};
+      overlay.querySelectorAll("[data-j-rating]").forEach(r => ratings[r.dataset.jRating] = parseInt(r.value, 10));
+      const notes = overlay.querySelector("[data-j='notes']").value.trim();
+
+      let photo = null;
+      if (file) {
+        photo = await new Promise(res => {
+          const reader = new FileReader();
+          reader.onload = () => res(reader.result);
+          reader.readAsDataURL(file);
+        });
+      }
+      await journalAdd({
+        date: Date.now(),
+        labKey: ctx.labKey,
+        labTitle: ctx.labTitle,
+        ratings, notes, photo,
+      });
+      close();
+      // Toast
+      showToast("Saved to your journal.");
+    });
+  }
+
+  function showToast(msg) {
+    const t = document.createElement("div");
+    t.className = "toast";
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.classList.add("show"));
+    setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 300); }, 2400);
+  }
+
+  async function renderJournalPage() {
+    const root = document.querySelector("[data-journal-root]");
+    if (!root) return;
+    let entries;
+    try { entries = await journalAll(); } catch { entries = []; }
+
+    if (entries.length === 0) {
+      root.innerHTML = `
+        <div class="callout callout--note">
+          <div class="callout__title">No entries yet</div>
+          <p style="margin:0;">Open any module's lab and tap <strong>📓 Log this batch</strong> after you cook. Your photos, notes, and ratings will collect here as a personal portfolio.</p>
+        </div>`;
+      return;
+    }
+
+    root.innerHTML = `
+      <div class="journal__bar">
+        <p class="muted" style="margin:0;">${entries.length} batch${entries.length === 1 ? "" : "es"} logged. All entries live on this device only.</p>
+        <button class="btn btn--ghost" data-j-print>Export as PDF</button>
+      </div>
+      <div class="journal__list">
+        ${entries.map(e => `
+          <article class="journal-entry">
+            ${e.photo ? `<img src="${e.photo}" alt="" class="journal-entry__photo">` : '<div class="journal-entry__photo journal-entry__photo--empty"></div>'}
+            <div class="journal-entry__body">
+              <header>
+                <h3>${e.labTitle}</h3>
+                <small>${new Date(e.date).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}</small>
+              </header>
+              <div class="journal-entry__ratings">
+                ${Object.entries(e.ratings || {}).map(([k, v]) => `<span class="rating-chip"><strong>${k}</strong> ${v}/9</span>`).join("")}
+              </div>
+              ${e.notes ? `<p class="journal-entry__notes">${e.notes.replace(/</g, "&lt;").replace(/\n/g, "<br>")}</p>` : ''}
+              <button class="journal-entry__del" data-j-del="${e.id}">Delete</button>
+            </div>
+          </article>`).join("")}
+      </div>`;
+
+    root.querySelectorAll("[data-j-del]").forEach(b =>
+      b.addEventListener("click", async () => {
+        if (!confirm("Delete this batch?")) return;
+        await journalDelete(parseInt(b.dataset.jDel, 10));
+        renderJournalPage();
+      })
+    );
+    root.querySelector("[data-j-print]")?.addEventListener("click", () => window.print());
+  }
+
+  // ---------- COMPLETION CERTIFICATE ----------
+  function initCertificate() {
+    // Trigger when the user marks the 12th module complete
+    document.querySelectorAll("[data-action='mark-complete']").forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Slight delay so progress write happens first
+        setTimeout(() => {
+          const done = Object.values(Progress.all()).filter(v => v.done).length;
+          const seen = localStorage.getItem("vfs.cert.seen") === "true";
+          if (done >= 12 && !seen) {
+            localStorage.setItem("vfs.cert.seen", "true");
+            launchCertificate();
+          }
+        }, 80);
+      });
+    });
+
+    // Allow re-opening the certificate from the curriculum page if already earned
+    document.querySelectorAll("[data-action='open-certificate']").forEach(btn =>
+      btn.addEventListener("click", launchCertificate)
+    );
+  }
+
+  function launchCertificate() {
+    fireConfetti();
+    const overlay = document.createElement("div");
+    overlay.className = "modal-overlay open";
+    overlay.innerHTML = `
+      <div class="modal modal--cert" role="dialog" aria-label="Course certificate">
+        <header class="modal__head">
+          <h3>You finished. 🌿</h3>
+          <button class="modal__close" aria-label="Close">✕</button>
+        </header>
+        <div class="modal__body">
+          <p>Twelve modules. Eleven kitchen labs. A capstone product. Add your name and download a certificate worth printing.</p>
+          <label class="field">
+            <span>Your name</span>
+            <input type="text" data-cert-name placeholder="Jamie Rivera" maxlength="48" autocomplete="name">
+          </label>
+          <div class="cert-preview" data-cert-preview></div>
+        </div>
+        <footer class="modal__foot">
+          <button class="btn btn--ghost" data-cert-cancel>Maybe later</button>
+          <button class="btn btn--primary" data-cert-download disabled>Download certificate</button>
+        </footer>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.body.style.overflow = "hidden";
+
+    const nameInput = overlay.querySelector("[data-cert-name]");
+    const dl = overlay.querySelector("[data-cert-download]");
+    const preview = overlay.querySelector("[data-cert-preview]");
+
+    const renderPreview = () => {
+      const name = nameInput.value.trim() || "Your name";
+      preview.innerHTML = certificateSVG(name, true);
+      dl.disabled = !nameInput.value.trim();
+    };
+    nameInput.addEventListener("input", renderPreview);
+    renderPreview();
+    requestAnimationFrame(() => nameInput.focus());
+
+    const close = () => { overlay.remove(); document.body.style.overflow = ""; };
+    overlay.querySelector(".modal__close").addEventListener("click", close);
+    overlay.querySelector("[data-cert-cancel]").addEventListener("click", close);
+
+    dl.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      if (!name) return;
+      downloadCertificate(name);
+    });
+  }
+
+  function certificateSVG(name, scaled) {
+    const date = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+    const w = 1200, h = 800;
+    const safe = name.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${scaled ? '100%' : w}" height="${scaled ? 'auto' : h}">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fdfaf3"/>
+            <stop offset="100%" stop-color="#ede1c4"/>
+          </linearGradient>
+          <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#36732a"/>
+            <stop offset="100%" stop-color="#c25b3a"/>
+          </linearGradient>
+        </defs>
+        <rect width="${w}" height="${h}" fill="url(#bg)"/>
+        <rect x="40" y="40" width="${w-80}" height="${h-80}" fill="none" stroke="#36732a" stroke-width="3" rx="14"/>
+        <rect x="56" y="56" width="${w-112}" height="${h-112}" fill="none" stroke="#36732a" stroke-width="0.8" stroke-dasharray="3 6" rx="10"/>
+        <text x="${w/2}" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" letter-spacing="6" fill="#36732a">THE PLANT LAB</text>
+        <text x="${w/2}" y="240" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="60" fill="#14201a">Certificate of Completion</text>
+        <text x="${w/2}" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#5a6660">awarded to</text>
+        <text x="${w/2}" y="400" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="72" font-style="italic" fill="#14201a">${safe}</text>
+        <line x1="${w/2-220}" y1="430" x2="${w/2+220}" y2="430" stroke="url(#accent)" stroke-width="3"/>
+        <text x="${w/2}" y="490" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#2f3a35">for completing all twelve modules of</text>
+        <text x="${w/2}" y="525" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#2f3a35">the Plant Lab curriculum in vegan food science —</text>
+        <text x="${w/2}" y="560" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#2f3a35">eleven kitchen labs and a capstone product.</text>
+
+        <g transform="translate(${w/2}, ${h-160})">
+          <circle r="60" fill="none" stroke="#36732a" stroke-width="3"/>
+          <circle r="50" fill="#36732a"/>
+          <text y="-2" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="40" font-weight="600" fill="white">P</text>
+          <text y="22" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" letter-spacing="3" fill="white">PLANT LAB</text>
+        </g>
+
+        <text x="160" y="${h-80}" font-family="Inter, sans-serif" font-size="14" fill="#5a6660">Awarded ${date}</text>
+        <text x="${w-160}" y="${h-80}" text-anchor="end" font-family="Inter, sans-serif" font-size="14" fill="#5a6660">theplantlab.io</text>
+      </svg>`;
+  }
+
+  function downloadCertificate(name) {
+    const svg = certificateSVG(name, false);
+    const blob = new Blob([svg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 2400; canvas.height = 1600;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(b => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(b);
+        a.download = `the-plant-lab-${name.replace(/\s+/g, "-").toLowerCase()}.png`;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      }, "image/png");
+    };
+    img.onerror = () => alert("Could not render the certificate image. Please try again.");
+    img.src = url;
+  }
+
+  function fireConfetti() {
+    const c = document.createElement("canvas");
+    c.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:300";
+    c.width = innerWidth; c.height = innerHeight;
+    document.body.appendChild(c);
+    const ctx = c.getContext("2d");
+    const colors = ["#36732a", "#6dac57", "#c25b3a", "#d6a83a", "#8c3a5e"];
+    const pieces = Array.from({ length: 140 }, () => ({
+      x: Math.random() * c.width,
+      y: -20 - Math.random() * c.height * 0.4,
+      r: 4 + Math.random() * 6,
+      vx: (Math.random() - 0.5) * 4,
+      vy: 2 + Math.random() * 4,
+      a: Math.random() * Math.PI * 2,
+      va: (Math.random() - 0.5) * 0.3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+    }));
+    let frames = 0, raf;
+    const tick = () => {
+      ctx.clearRect(0, 0, c.width, c.height);
+      pieces.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.a += p.va; p.vy += 0.04;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.a);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.r, -p.r * 0.4, p.r * 2, p.r * 0.8);
+        ctx.restore();
+      });
+      frames++;
+      if (frames < 240) raf = requestAnimationFrame(tick);
+      else c.remove();
+    };
+    tick();
   }
 })();

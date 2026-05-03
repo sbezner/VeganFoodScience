@@ -4,7 +4,36 @@ title: "The Plant Lab — A free curriculum in vegan food science"
 description: "Learn the chemistry, biology, and craft of plant-based food. 12 modules, 60+ hours, kitchen labs, and a final capstone — free and open."
 ---
 
-<section class="hero">
+{% comment %}Today panel — populated by JS for returning visitors only{% endcomment %}
+<section class="today" data-today hidden aria-label="Welcome back">
+  <div class="container">
+    <div class="today__panel">
+      <div class="today__greeting">
+        <span class="today__eyebrow">Welcome back</span>
+        <h2 class="today__title" data-today-title>You're making progress.</h2>
+      </div>
+      <div class="today__cards">
+        <a class="today__card today__card--primary" data-today-resume>
+          <small>Pick up where you left off</small>
+          <strong data-today-resume-title>Module 1: Foundations</strong>
+          <span class="today__cta">Continue →</span>
+        </a>
+        <a class="today__card" data-today-review href="{{ '/review/' | relative_url }}">
+          <small>Spaced repetition</small>
+          <strong data-today-review-title>0 questions due today</strong>
+          <span class="today__cta">Open review →</span>
+        </a>
+        <div class="today__card today__card--fact">
+          <small>Fact of the day</small>
+          <strong data-today-fact></strong>
+        </div>
+      </div>
+      <button class="today__dismiss" data-today-dismiss aria-label="Dismiss this panel">Show the homepage instead</button>
+    </div>
+  </div>
+</section>
+
+<section class="hero" data-hero>
   <div class="container">
     <span class="hero__kicker">An open curriculum · 12 modules · ~60 hours</span>
     <h1 class="hero__title">The science of <em>plant-based</em> food, taught from the molecule up.</h1>

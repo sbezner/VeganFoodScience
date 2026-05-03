@@ -56,5 +56,12 @@ permalink: /search.json
     "summary": "Spaced-repetition review of every quiz question across the course.",
     "kind": "Page",
     "body": "spaced repetition review quiz questions"
+  },
+  {
+    "url": "{{ '/journal/' | relative_url }}",
+    "title": "Journal",
+    "summary": "Your personal sensory journal — every batch you've logged from the kitchen labs.",
+    "kind": "Page",
+    "body": "journal portfolio batch notes ratings photos"
   }
 ]
