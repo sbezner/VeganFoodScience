@@ -7,24 +7,26 @@ An open, hands-on curriculum in **vegan food science** — built to be hosted on
 
 ## Live site
 
-The site is built with Jekyll and deployed by the GitHub Actions workflow at
-`.github/workflows/pages.yml` on every push to `main`.
+**[theplantlab.cc](https://theplantlab.cc)** — served from a custom domain
+on GitHub Pages, deployed automatically by `.github/workflows/pages.yml`
+on every push to `main`.
 
-**One-time setup (once per repo):**
+### One-time setup (per repo / per domain)
 
-1. Go to **Settings → Pages**.
-2. Under **Build and deployment → Source**, select **GitHub Actions**.
-3. Push to `main` (or re-run the workflow). The first deploy takes ~1 min.
+1. **Cloudflare DNS** — add four `A` records on the apex pointing to
+   GitHub's Pages IPs (`185.199.108.153`, `.109.153`, `.110.153`,
+   `.111.153`) and a `CNAME` from `www` → `sbezner.github.io`. **Set the
+   proxy to "DNS only" (gray cloud)** so GitHub can issue the Let's
+   Encrypt certificate.
+2. **Repo `CNAME` file** — already present at the root: `theplantlab.cc`.
+3. **GitHub → Settings → Pages**:
+   - Source: **GitHub Actions**
+   - Custom domain: `theplantlab.cc` (it auto-fills from the `CNAME` file)
+   - Wait for the green DNS check, then tick **Enforce HTTPS**.
 
-The site will be served at:
-
-```
-https://sbezner.github.io/VeganFoodScience/
-```
-
-> **Important:** the URL path is **case-sensitive** and must match the
-> repository name exactly. The `baseurl` value in `_config.yml` must
-> match too — update it if you fork or rename the repo.
+> When forking, change the `CNAME` file to your domain, set
+> `url:` in `_config.yml`, and (if it's a project page) restore
+> `baseurl:` to `/yourrepo`.
 
 ## What's in the curriculum
 

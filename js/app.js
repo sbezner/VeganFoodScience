@@ -1058,7 +1058,7 @@
         </g>
 
         <text x="160" y="${h-80}" font-family="Inter, sans-serif" font-size="14" fill="#5a6660">Awarded ${date}</text>
-        <text x="${w-160}" y="${h-80}" text-anchor="end" font-family="Inter, sans-serif" font-size="14" fill="#5a6660">theplantlab.io</text>
+        <text x="${w-160}" y="${h-80}" text-anchor="end" font-family="Inter, sans-serif" font-size="14" fill="#5a6660">theplantlab.cc</text>
       </svg>`;
   }
 

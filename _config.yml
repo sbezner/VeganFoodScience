@@ -3,12 +3,10 @@ tagline: "An open curriculum in vegan food science"
 description: "An open, hands-on curriculum that teaches the chemistry, biology, and craft behind plant-based food — from amino acids to fermentation, texturization, and the future of cultivated foods."
 author: "The Plant Lab"
 
-# IMPORTANT: For a GitHub project page (sbezner.github.io/VeganFoodScience/)
-# baseurl MUST match the repo name (case-sensitive) so that asset and link
-# paths produced by `relative_url` resolve correctly.
-# If you fork or rename the repo, update both fields.
-baseurl: "/VeganFoodScience"
-url: "https://sbezner.github.io"
+# Custom domain (theplantlab.cc) — served at the apex, so no baseurl prefix.
+# A `CNAME` file at the repo root mirrors this for GitHub Pages.
+baseurl: ""
+url: "https://theplantlab.cc"
 
 markdown: kramdown
 highlighter: rouge
